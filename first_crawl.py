@@ -26,7 +26,13 @@ def pushToMongo(box):
     boxCollection.insert_one(box)
     time.sleep(35)
 
+def printBox(box):
+    print("Round: " + box.round + " Type: " + box.type)
+
+
 while(True):
+    driver.refresh()
+    time.sleep(1)
     round = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
     box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]").get_attribute("class")
     box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]").get_attribute("class")
@@ -40,28 +46,36 @@ while(True):
     if prize in box1 and noPrize not in box1:
         newBox = {"round": round, "type": "box1", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box2 and noPrize not in box2:
         newBox = {"round": round, "type": "box2", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box3 and noPrize not in box3:
         newBox = {"round": round, "type": "box3", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box4 and noPrize not in box4:
         newBox = {"round": round, "type": "box4", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box5 and noPrize not in box5:
         newBox = {"round": round, "type": "box5", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box6 and noPrize not in box6:
         newBox = {"round": round, "type": "box6", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box7 and noPrize not in box7:
         newBox = {"round": round, "type": "box7", "time": datetime.now()}
         pushToMongo(newBox)
+        printBox(newBox)
     if prize in box8 and noPrize not in box8:
         newBox = {"round": round, "type": "box8", "time": datetime.now()}
         pushToMongo(newBox)
-    time.sleep(0.5)
+        printBox(newBox)
+    
 
 
 
