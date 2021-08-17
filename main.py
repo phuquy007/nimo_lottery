@@ -4,38 +4,32 @@ from pymongo import MongoClient
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
-boxCollection = db["Boxes"]
+boxCollection = db["BoxesByType"]
 
 totalCount = boxCollection.count_documents({})
 
-box5 = boxCollection.find({"type": "x5"})
-box5Count = boxCollection.count_documents({"type": "x5"})
-box5BasePercentage = box5Count / totalCount
+types = ["x5", "x10", "x15", "x25", "x45"]
+def printList(collection):
+    for item in collection:
+        print(item["round"] + " - " + str(item["time"]))
 
-box10 = boxCollection.find({"type": "x10"})
-box10Count = boxCollection.count_documents({"type": "x10"})
-box10BasePercentage = box10Count / totalCount
-
-box15 = boxCollection.find({"type": "x15"})
-box15Count = boxCollection.count_documents({"type": "x15"})
-box15BasePercentage = box15Count / totalCount
-
-box25 = boxCollection.find({"type": "x25"})
-box25Count = boxCollection.count_documents({"type": "x25"})
-box25BasePercentage = box25Count / totalCount
-
-box45 = boxCollection.find({"type": "x45"})
-box45Count = boxCollection.count_documents({"type": "x45"})
-box45BasePercentage = box45Count / totalCount
+baseBoxes = []
+for type in types:
+    baseBoxes.append({"type": type, "percentage": boxCollection.count_documents({"type": type})/totalCount })
 
 print("Total Count: " + str(totalCount))
-print("Box 5 - Count: " + str(box5Count) + ", Base-Percentage: " + str(round(box5BasePercentage,3)))
-print("Box 10 - Count: " + str(box10Count) + ", Base-Percentage: " + str(round(box10BasePercentage,3)))
-print("Box 15 - Count: " + str(box15Count) + ", Base-Percentage: " + str(round(box15BasePercentage,3)))
-print("Box 25 - Count: " + str(box25Count) + ", Base-Percentage: " + str(round(box25BasePercentage,3)))
-print("Box 45 - Count: " + str(box45Count) + ", Base-Percentage: " + str(round(box45BasePercentage,3)))
+for box in baseBoxes:
+    print("Box Type: " + box["type"] + " - Percentage: " + str(round(box["percentage"], 4)))
 
 #Get the newest 100
-newestCollection = boxCollection.find().limit(100).sort({"time": 1})
-for item in newestCollection:
-    print(item.round + " - " + item.time)
+curTotal = 100
+newestCollection =list(boxCollection.find().limit(100).sort("time", -1))
+curBoxes = []
+for type in types:
+    curBoxes.append({"type": type, "percentage": sum(1 for i in newestCollection if i["type"] == type)})
+
+for box in curBoxes:
+    print("Current Box "+ box["type"] + " - " + str(box["percentage"]))
+
+
+predicts = []
