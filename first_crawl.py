@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import pymongo
 from pymongo import MongoClient
+from datetime import datetime
 
 chrome_options = Options()
 
@@ -18,40 +19,76 @@ url = 'https://www.nimo.tv/mkt/act/super/box_lottery'
 driver.get(url)
 time.sleep(3)
 
+prize = "prize-box"
+noPrize = "no-prize-box"
+
+def pushToMongo(box):
+    boxCollection.insert_one(box)
+    time.sleep(35)
+
 while(True):
-    round = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em")
-    roundText = round.text
-    boxes = driver.find_elements_by_xpath("//*[@id='container']/div/div[3]//picture/img")
-    imgs = [el.get_attribute("src") for el in boxes]
-    lastImg = imgs[0]
-    type = "";
-    if "box0" in lastImg:
-        type = "x5"
-    if "box4" in lastImg:
-        type = "x10"
-    if "box5" in lastImg:
-        type = "x15"
-    if "box6" in lastImg:
-        type = "x25"
-    if "box7" in lastImg:
-        type = "x45"
-    print("Round: " + roundText + " Type: " + type)
-    boxLog = {"round": roundText, "type": type}
-    boxCollection.insert_one(boxLog)
-    time.sleep(40)
-    driver.refresh()
-    time.sleep(4)
+    round = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
+    box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]").get_attribute("class")
+    box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]").get_attribute("class")
+    box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]").get_attribute("class")
+    box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]").get_attribute("class")
+    box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]").get_attribute("class")
+    box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]").get_attribute("class")
+    box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]").get_attribute("class")
+    box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]").get_attribute("class")
+
+    if prize in box1 and noPrize not in box1:
+        newBox = {"round": round, "type": "box1", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box2 and noPrize not in box2:
+        newBox = {"round": round, "type": "box2", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box3 and noPrize not in box3:
+        newBox = {"round": round, "type": "box3", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box4 and noPrize not in box4:
+        newBox = {"round": round, "type": "box4", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box5 and noPrize not in box5:
+        newBox = {"round": round, "type": "box5", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box6 and noPrize not in box6:
+        newBox = {"round": round, "type": "box6", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box7 and noPrize not in box7:
+        newBox = {"round": round, "type": "box7", "time": datetime.now()}
+        pushToMongo(newBox)
+    if prize in box8 and noPrize not in box8:
+        newBox = {"round": round, "type": "box8", "time": datetime.now()}
+        pushToMongo(newBox)
+    time.sleep(0.5)
+
+
+
+# while(True):
+#     round = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em")
+#     roundText = round.text
+#     boxes = driver.find_elements_by_xpath("//*[@id='container']/div/div[3]//picture/img")
+#     imgs = [el.get_attribute("src") for el in boxes]
+#     lastImg = imgs[0]
+#     type = "";
+#     if "box0" in lastImg:
+#         type = "x5"
+#     if "box4" in lastImg:
+#         type = "x10"
+#     if "box5" in lastImg:
+#         type = "x15"
+#     if "box6" in lastImg:
+#         type = "x25"
+#     if "box7" in lastImg:
+#         type = "x45"
+#     print("Round: " + roundText + " Type: " + type)
+#     boxLog = {"round": roundText, "type": type, "time": datetime.now()}
+#     boxCollection.insert_one(boxLog)
+#     time.sleep(40)
+#     driver.refresh()
+#     time.sleep(4)
     
-
-# elements = driver.find_element_by_css_selector(".nimo-box-lottery__last-result")
-# lastResult = driver.find_element_by_xpath("//*[@id='container']/div/div[3]")
-#box0 = x5
-#box4 = x10
-#box5 = x15
-#box6 = x25
-#box7 = x45
-
-
 #get all the data for every 45s
 #then save all the data to the database - maybe use mongoDB
 #calculate the percentage of everybox
