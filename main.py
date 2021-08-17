@@ -17,4 +17,3 @@ p_element = driver.find_element_by_class_name(class_='nimo-box-lottery__box nimo
 print(p_element.text)
 
 results = []
-
