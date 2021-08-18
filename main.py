@@ -5,8 +5,8 @@ from bean_crawl import Plays
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
-boxCollection = db["BoxesByType"]
-# boxCollection = db["BeanBoxes"]
+# boxCollection = db["BoxesByType"]
+boxCollection = db["BeanBoxes"]
 
 totalCount = boxCollection.count_documents({})
 playPoint = 50

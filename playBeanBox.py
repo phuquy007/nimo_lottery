@@ -43,6 +43,9 @@ breakPoints = {"x5": 100, "x10": 80, "x15": 70, "x25": 60, "x45": 50}
 # for box in baseBoxes:
 #     print("Box Type: " + box["type"] + " - Percentage: " + str(round(box["percentage"], 2)))
 
+# > 11  times x 3
+# > 10 timesx2
+# > 8       x1
 def isX5OccurAlot():
     x5LastestBoxes = list(boxCollection.find().sort("time",-1).limit(8))
     for box in x5LastestBoxes:
