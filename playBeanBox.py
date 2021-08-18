@@ -33,7 +33,7 @@ box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]"
 totalCount = boxCollection.count_documents({})
 
 types = ["x5", "x10", "x15", "x25", "x45"]
-breakPoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 80, "x45": 50}
+breakPoints = {"x5": 100, "x10": 80, "x15": 70, "x25": 60, "x45": 50}
 
 # baseBoxes = []
 # for type in types:
@@ -57,6 +57,7 @@ while(True):
         chosenBox.append("x15")
         chosenBox.append("x25")
         chosenBox.append("x45")
+        print("x5 appear a lot")
 #else if if 2 or more 2nd row have the distanceDiffPercent > 30%, add these box to the chosenBoxes
     else:
         sortedCollection = list(boxCollection.find({}).sort("time",-1))
