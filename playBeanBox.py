@@ -46,21 +46,24 @@ breakPoints = {"x5": 100, "x10": 80, "x15": 70, "x25": 60, "x45": 50}
 # > 11  times x 3
 # > 10 timesx2
 # > 8       x1
-def isX5OccurAlot():
-    x5LastestBoxes = list(boxCollection.find().sort("time",-1).limit(8))
-    for box in x5LastestBoxes:
-        if box["type"] != "x5":
-            return False
-    return True
 
+def isX5OccurAlot():
+    x5Count = 0
+    x5LastestBoxes = list(boxCollection.find().sort("time",-1).limit(20))
+    for box in x5LastestBoxes:
+        if box["type"] == "x5":
+            x5Count += 1
+    return x5Count
+
+# count how many times x5 appear in a row
 while(True):
     chosenBox = []
-    if isX5OccurAlot():
+    if isX5OccurAlot() > 8:
         chosenBox.append("x10")
         chosenBox.append("x15")
         chosenBox.append("x25")
         chosenBox.append("x45")
-        print("x5 appear a lot")
+        print("x5 appear " + str(isX5OccurAlot()) + " times in a row")
 #else if if 2 or more 2nd row have the distanceDiffPercent > 30%, add these box to the chosenBoxes
     else:
         sortedCollection = list(boxCollection.find({}).sort("time",-1))
