@@ -28,42 +28,6 @@ def pushToMongo(box):
 def printBox(box):
     print("Round: " + box["round"] + " Type: " + box["type"])
 
-box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
-box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
-box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
-box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
-box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
-box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
-box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
-box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
-
-def playX5():
-    print("Play x5")
-
-def playX10():
-    print("Play x10")
-
-def playX15():
-    print("Play x15")
-
-def playX25():
-    print("Play x25")
-
-def playX45():
-    print("Play x45")
-
-def Plays(boxArray):
-    if "x5" in boxArray:
-        playX5()
-    if "x10" in boxArray:
-        playX10()
-    if "x15" in boxArray:
-        playX15()
-    if "x25" in boxArray:
-        playX25()
-    if "x45" in boxArray:
-        playX45()
-    
 while(True):
     round = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
     boxes = driver.find_elements_by_xpath("//*[@id='container']/div/div[3]//picture/img")
