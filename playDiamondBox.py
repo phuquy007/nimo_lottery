@@ -34,9 +34,9 @@ totalCount = boxCollection.count_documents({})
 types = ["x5", "x10", "x15", "x25", "x45"]
 breakPoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 80, "x45": 50}
 
-baseBoxes = []
-for type in types:
-    baseBoxes.append({"type": type, "percentage": round(boxCollection.count_documents({"type": type})/totalCount * 100, 3)})
+# baseBoxes = []
+# for type in types:
+#     baseBoxes.append({"type": type, "percentage": round(boxCollection.count_documents({"type": type})/totalCount * 100, 3)})
 
 # print("Total Count: " + str(totalCount))
 # for box in baseBoxes:
@@ -61,7 +61,7 @@ while(True):
         sortedCollection = list(boxCollection.find({}).sort("time",-1))
         for type in types:
             curPos = sortedCollection.index(next(i for i in sortedCollection if i["type"]==type)) + 1
-            basePercent = next((x for x in baseBoxes if x["type"] == type), None)["percentage"]
+            basePercent = round(boxCollection.count_documents({"type": type})/totalCount * 100, 3)
             baseOccur = 100 / basePercent
             occurDiff = curPos - baseOccur
             distanceDiffPecent = round(occurDiff/baseOccur * 100, 3)
