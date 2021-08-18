@@ -74,25 +74,25 @@ while(True):
         chosenBox.append("x5")
     for box in chosenBox:
         if box == "x5":
-            # box1.click()
-            # box2.click()
-            # box3.click()
-            # box4.click()
+            box1.click()
+            box2.click()
+            box3.click()
+            box4.click()
             print("Box 1,2,3,4 CLicked")
         if box == "x10":
-            # box5.click()
+            box5.click()
             print("Box 5 CLicked")
         if box == "x15":
-            # box6.click()
+            box6.click()
             print("Box 6 CLicked")
         if box == "x25":
-            # box7.click()
+            box7.click()
             print("Box 7 CLicked")
         if box == "x45":
-            # box8.click()
+            box8.click()
             print("Box 8 CLicked")
     time.sleep(35)
-    driver.refresh()
+    # driver.refresh()
     time.sleep(5)
 
 
