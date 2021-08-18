@@ -6,9 +6,9 @@ from pymongo import MongoClient
 from datetime import datetime
 
 chrome_options = Options()
-
+chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--window-size=10x10")  
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="D:\WorkPlace\chromedriver.exe")
 
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
@@ -45,9 +45,9 @@ while(True):
     newBox = {"round": round, "type": type, "time": datetime.now()}
     pushToMongo(newBox)
     printBox(newBox)
-    time.sleep(39)
+    time.sleep(35)
     driver.refresh()
-    time.sleep(4)
+    time.sleep(5)
     
 #get all the data for every 45s
 #then save all the data to the database - maybe use mongoDB
