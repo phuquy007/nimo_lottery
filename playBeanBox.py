@@ -43,9 +43,11 @@ breakPoints = {"x5": 100, "x10": 80, "x15": 70, "x25": 60, "x45": 50}
 # for box in baseBoxes:
 #     print("Box Type: " + box["type"] + " - Percentage: " + str(round(box["percentage"], 2)))
 
-# > 11  times x 3
-# > 10 timesx2
-# > 8       x1
+# 8 times x1 box
+# 9 times x1 box
+# 10 times x2 box
+# 11 times x4 box
+# 12 times x8 box
 
 def isX5OccurAlot():
     x5Count = 0
