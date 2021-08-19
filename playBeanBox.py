@@ -23,7 +23,7 @@ time.sleep(20)
 totalCount = boxCollection.count_documents({})
 
 types = ["x5", "x10", "x15", "x25", "x45"]
-breakPoints = {"x5": 200, "x10": 100, "x15": 90, "x25": 80, "x45": 60}
+breakPoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 90, "x45": 80}
 
 # print("Total Count: " + str(totalCount))
 # for box in baseBoxes:
@@ -34,6 +34,15 @@ breakPoints = {"x5": 200, "x10": 100, "x15": 90, "x25": 80, "x45": 60}
 # 10 times x2 box
 # 11 times x4 box
 # 12 times x8 box
+def isX50notAppear():
+    notX5Count = 0
+    lastestBoxes = list(boxCollection.find().sort("time",-1).limit(10))
+    for box in lastestBoxes:
+        if box["type"] != "x5":
+            notX5Count += 1
+        else:
+            return notX5Count
+    return notX5Count
 
 def isX5OccurAlot():
     x5Count = 0
@@ -63,6 +72,9 @@ while(True):
             box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
             box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
             box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
+
+            # x500Key = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
+            # x500Key.click()
         except:
             continue
         chosenBox = []
@@ -74,6 +86,10 @@ while(True):
                 chosenBox.append("x45")    
             print("x5 appear " + str(isX5OccurAlot()) + " times in a row")
 
+        if isX50notAppear() > 3:
+            for i in range(3, isX50notAppear()+1):
+                chosenBox.append("x5")
+                
         sortedCollection = list(boxCollection.find({}).sort("time",-1))
         for type in types:
             basePercent = round(boxCollection.count_documents({"type": type})/totalCount * 100, 3)
@@ -86,6 +102,7 @@ while(True):
                 chosenBox.append(type)
         if len(chosenBox) <= 1:
             chosenBox.append("x5")
+        print("Current Round: " + str(curRound))
         for box in chosenBox:
             print(box)
         for box in chosenBox:
