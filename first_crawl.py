@@ -24,7 +24,7 @@ noPrize = "no-prize-box"
 
 def pushToMongo(box):
     boxCollection.insert_one(box)
-    time.sleep(35)
+    g
 
 def printBox(box):
     print("Round: " + box.round + " Type: " + box.type)

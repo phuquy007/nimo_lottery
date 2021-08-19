@@ -6,31 +6,29 @@ from pymongo import MongoClient
 from datetime import datetime
 
 chrome_options = Options()
-
+chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--window-size=10x10")  
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="D:\WorkPlace\chromedriver.exe")
 
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
-boxCollection = db["BeanBoxes"]
+boxCollection = db["BoxesByType"]
 
-url = 'https://www.nimo.tv/mkt/act/super/bean_box_lottery'
+url = 'https://www.nimo.tv/mkt/act/super/box_lottery'
 driver.get(url)
 time.sleep(3)
-
-prize = "prize-box"
-noPrize = "no-prize-box"
 
 def pushToMongo(box):
     boxCollection.insert_one(box)
     
+
 def printBox(box):
     print("Round: " + box["round"] + " Type: " + box["type"])
 
 while(True):
     driver.refresh()
-    time.sleep(3)
+    time.sleep(5)
     curRound = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
     previousRound = list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
     if(curRound != previousRound):
@@ -51,7 +49,10 @@ while(True):
         newBox = {"round": curRound, "type": type, "time": datetime.now()}
         pushToMongo(newBox)
         printBox(newBox)
-    else: 
+    else:
         continue
     
-
+    
+#get all the data for every 45s
+#then save all the data to the database - maybe use mongoDB
+#calculate the percentage of everybox
