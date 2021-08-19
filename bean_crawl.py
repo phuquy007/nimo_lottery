@@ -30,9 +30,9 @@ def printBox(box):
 
 while(True):
     driver.refresh()
-    time.sleep(2)
+    time.sleep(3)
     curRound = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
-    previousRound = boxCollection.find({}).sort("time",-1).limit(1)["round"]
+    previousRound = list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
     if(curRound != previousRound):
         boxes = driver.find_elements_by_xpath("//*[@id='container']/div/div[3]//picture/img")
         imgs = [el.get_attribute("src") for el in boxes]

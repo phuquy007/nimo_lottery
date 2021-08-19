@@ -6,12 +6,5 @@
 types = ["x5", "x10", "x15", "x25", "x45"]
 breakpoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 80, "x45": 50}
 
-chosenBox = []
-chosenBox.append("x5")
-chosenBox.append("x10")
-
-for box in chosenBox:
-    if "x5" in box:
-        print("x5 ne may")
-    if "x10" in box:
-        print("x10 ne may")
+for i in range (2,3):
+    print(i)

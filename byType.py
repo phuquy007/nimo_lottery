@@ -27,27 +27,31 @@ def printBox(box):
     print("Round: " + box["round"] + " Type: " + box["type"])
 
 while(True):
-    round = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
-    boxes = driver.find_elements_by_xpath("//*[@id='container']/div/div[3]//picture/img")
-    imgs = [el.get_attribute("src") for el in boxes]
-    lastImg = imgs[0]
-    type = "";
-    if "box0" in lastImg:
-        type = "x5"
-    if "box4" in lastImg:
-        type = "x10"
-    if "box5" in lastImg:
-        type = "x15"
-    if "box6" in lastImg:
-        type = "x25"
-    if "box7" in lastImg:
-        type = "x45"
-    newBox = {"round": round, "type": type, "time": datetime.now()}
-    pushToMongo(newBox)
-    printBox(newBox)
-    time.sleep(35)
     driver.refresh()
     time.sleep(5)
+    curRound = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
+    previousRound = list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
+    if(curRound != previousRound):
+        boxes = driver.find_elements_by_xpath("//*[@id='container']/div/div[3]//picture/img")
+        imgs = [el.get_attribute("src") for el in boxes]
+        lastImg = imgs[0]
+        type = "";
+        if "box0" in lastImg:
+            type = "x5"
+        if "box4" in lastImg:
+            type = "x10"
+        if "box5" in lastImg:
+            type = "x15"
+        if "box6" in lastImg:
+            type = "x25"
+        if "box7" in lastImg:
+            type = "x45"
+        newBox = {"round": curRound, "type": type, "time": datetime.now()}
+        pushToMongo(newBox)
+        printBox(newBox)
+    else:
+        continue
+    
     
 #get all the data for every 45s
 #then save all the data to the database - maybe use mongoDB
