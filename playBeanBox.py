@@ -23,7 +23,7 @@ time.sleep(20)
 totalCount = boxCollection.count_documents({})
 
 types = ["x5", "x10", "x15", "x25", "x45"]
-breakPoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 90, "x45": 80}
+breakPoints = {"x5": 200, "x10": 200, "x15": 120, "x25": 100, "x45": 80}
 
 # print("Total Count: " + str(totalCount))
 # for box in baseBoxes:
@@ -89,7 +89,7 @@ while(True):
         if isX50notAppear() > 3:
             for i in range(3, isX50notAppear()+1):
                 chosenBox.append("x5")
-                
+
         sortedCollection = list(boxCollection.find({}).sort("time",-1))
         for type in types:
             basePercent = round(boxCollection.count_documents({"type": type})/totalCount * 100, 3)
