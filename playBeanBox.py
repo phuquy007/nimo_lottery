@@ -99,7 +99,9 @@ while(True):
             distanceDiffPecent = round(occurDiff/baseOccur * 100, 3)
             print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
             if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
-                chosenBox.append(type)
+                percentTimes = round(distanceDiffPecent / breakPoints[type])
+                for i in (0, percentTimes):
+                    chosenBox.append(type)
         if len(chosenBox) <= 1:
             chosenBox.append("x5")
         print("Current Round: " + str(curRound))
