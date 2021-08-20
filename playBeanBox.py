@@ -76,7 +76,7 @@ while(True):
         chosenBox = []
         if isX5OccurAlot() >= 13:
             for i in range (13, isX5OccurAlot()+1):
-                for i in range(2):
+                for i in range(4):
                     chosenBox.append("x10")
                     chosenBox.append("x15")
                     chosenBox.append("x25")
