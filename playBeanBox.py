@@ -104,7 +104,7 @@ while(True):
             baseOccur = 100 / basePercent
             occurDiff = curPos - baseOccur
             distanceDiffPecent = round(occurDiff/baseOccur * 100, 3)
-            print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
+            # print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
             # if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
             #     percentTimes = round(distanceDiffPecent / breakPoints[type])
             #     print("Percent Times:" + str(percentTimes))

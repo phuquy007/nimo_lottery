@@ -1,5 +1,3 @@
-from typing import Counter
-from playBeanBoxV2 import GetCurRound
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -99,23 +97,28 @@ def BoxAppearInRow(input):
 
 def pushCalculation():
     totalCount = boxCollection.count_documents({})
-    BoxesCalculation = []
+    BoxesCalculation = {}
     
     for box in BOXES:
-        basePercentage = round(boxCollection.count_documents({"box": box})/totalCount * 100, 2)
+        curCount = boxCollection.count_documents({"box": box})
+        basePercentage = curCount/totalCount * 100
         curPercentage = GetCurBoxPercentage(box)
         percentageDiff = curPercentage - basePercentage
-        baseAppear = round(100/basePercentage, 2)
+        baseAppear = 100/basePercentage
         notAppearFor = BoxNotAppear(box)
-        appearDiffPercentage = round((notAppearFor - baseAppear) / baseAppear, 2)
-        boxCalculation = {"box": box, "basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
+        appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
+        boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
         "baseOccur": baseAppear, "notOccurFor": notAppearFor, "occurDiffPercentage": appearDiffPercentage}
-        BoxesCalculation.append(boxCalculation)
+        BoxesCalculation[box] = boxCalculation
         breakPoints = GenerateBreakPoints()
-    calculationCollection.insert_one({GetCurRound:{boxes: BoxesCalculation}, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
+        # print(BoxesCalculation)
+    # calculationCollection.insert_one(BoxesCalculation)
+   
+    calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
     "breakPoints": breakPoints})
 
-    PrintBoxesCalculation(BoxesCalculation)
+    # calculationCollection.insert_one({GetCurRound:{boxes: BoxesCalculation}})
+    # PrintBoxesCalculation(BoxesCalculation)
 
 
 round = None
