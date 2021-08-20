@@ -70,7 +70,6 @@ else:
 #     chosenBox.append("x5")
 #else add x5 and another box that has distanceDiffPercent > 30%
 
-
 for play in chosenBox:
     print(play)
 Plays(chosenBox)
