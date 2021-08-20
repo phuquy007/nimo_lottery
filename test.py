@@ -1,10 +1,14 @@
-# testList = [{"type":"x10", "value": 10},{"type":"x5", "value": 5},{"type":"x35", "value": 35},{"type":"x15", "value": 15},{"type":"x5", "value": 5},{"type":"x25", "value": 25}]
+import pymongo
+from pymongo import MongoClient
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from datetime import datetime
+import time
 
-# result = testList.index(next(x for x in testList if x["type"] == "x15"))
-# print(result)
+CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
+client = MongoClient(CONNECTION_STRING)
+db = client["NimoLottery"]
+calculationCollection = db["BeanAnalyst"]
+boxCollection = db["BeanBoxesv2"]
 
-types = ["x5", "x10", "x15", "x25", "x45"]
-breakpoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 80, "x45": 50}
-
-for i in range(1, 4):
-    print(str(i))
+print(list(boxCollection.find({"round": "599"})))

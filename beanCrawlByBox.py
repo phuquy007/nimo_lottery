@@ -25,8 +25,15 @@ NOPRIZE = "no-prize-box"
 BOXES = ["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8"]
 
 def GenerateBreakPoints():
-    breakPoints = {"box1": 100, "box2": 100, "box3": 100, "box4": 100, "box5": 80, "box6": 60, "box7": 40, "box8":20}
+    breakPoints = {"box1": 200, "box2": 200, "box3": 200, "box4": 200, "box5": 180, "box6": 160, "box7": 140, "box8":120}
     return breakPoints
+
+def GetBreakPoint():
+    document = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+    if(document["breakPoints"]):
+        return document["breakPoints"]
+    else:
+        return GenerateBreakPoints()
 
 # Return the current Round
 def GetCurRound():
@@ -95,6 +102,14 @@ def BoxAppearInRow(input):
             return counter
     return counter
 
+def Add1stRow(chosenBox):
+    for i in range (1, 5):
+        chosenBox.append("box"+str(i))
+
+def Add2ndRow(chosenBox):
+    for i in range (5, 9):
+        chosenBox.append("box"+str(i))
+
 def pushCalculation():
     totalCount = boxCollection.count_documents({})
     BoxesCalculation = {}
@@ -108,11 +123,9 @@ def pushCalculation():
         notAppearFor = BoxNotAppear(box)
         appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
         boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
-        "baseOccur": baseAppear, "notOccurFor": notAppearFor, "occurDiffPercentage": appearDiffPercentage}
+        "baseAppear": baseAppear, "notAppearFor": notAppearFor, "appearDiffPercentage": appearDiffPercentage, "time": datetime.now()}
         BoxesCalculation[box] = boxCalculation
-        breakPoints = GenerateBreakPoints()
-        # print(BoxesCalculation)
-    # calculationCollection.insert_one(BoxesCalculation)
+        breakPoints = GetBreakPoint()
    
     calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
     "breakPoints": breakPoints})
