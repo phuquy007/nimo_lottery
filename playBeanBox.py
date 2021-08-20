@@ -23,11 +23,7 @@ time.sleep(20)
 totalCount = boxCollection.count_documents({})
 
 types = ["x5", "x10", "x15", "x25", "x45"]
-breakPoints = {"x5": 200, "x10": 200, "x15": 120, "x25": 100, "x45": 80}
-
-# print("Total Count: " + str(totalCount))
-# for box in baseBoxes:
-#     print("Box Type: " + box["type"] + " - Percentage: " + str(round(box["percentage"], 2)))
+breakPoints = {"x5": 200, "x10": 200, "x15": 150, "x25": 100, "x45": 80}
 
 # 8 times x1 box
 # 9 times x1 box
@@ -100,7 +96,8 @@ while(True):
             print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
             if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
                 percentTimes = round(distanceDiffPecent / breakPoints[type])
-                for i in (0, percentTimes):
+                print("Percent Times:" + str(percentTimes))
+                for i in range(0, percentTimes):
                     chosenBox.append(type)
         if len(chosenBox) <= 1:
             chosenBox.append("x5")

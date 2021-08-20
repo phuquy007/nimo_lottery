@@ -6,5 +6,5 @@
 types = ["x5", "x10", "x15", "x25", "x45"]
 breakpoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 80, "x45": 50}
 
-cur = 320
-print(round(cur / breakpoints["x10"]))
+for i in range (0, 1):
+    print ("test")
