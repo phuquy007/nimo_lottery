@@ -76,20 +76,20 @@ while(True):
         chosenBox = []
         if isX5OccurAlot() >= 13:
             for i in range (13, isX5OccurAlot()+1):
-                for i in range(2):
+                for i in range(4):
                     chosenBox.append("x10")
                     chosenBox.append("x15")
                     chosenBox.append("x25")
                     chosenBox.append("x45")    
             print("x5 appear " + str(isX5OccurAlot()) + " times in a row")
 
-        if isX50notAppear >= 5:
+        if isX50notAppear() >= 5:
             for i in range(40):
                 chosenBox.append("x5")
-        if isX50notAppear == 4:
+        if isX50notAppear() == 4:
             for i in range(20):
                 chosenBox.append("x5")
-        if isX50notAppear == 3:
+        if isX50notAppear() == 3:
             for i in range(10):
                 chosenBox.append("x5")
 
