@@ -113,6 +113,8 @@ while(True):
         # if len(chosenBox) <= 1:
         #     chosenBox.append("x5")
         print("Current Round: " + str(curRound))
+        if(not chosenBox):
+            continue
         for box in chosenBox:
             print(box)
         for box in chosenBox:
