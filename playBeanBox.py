@@ -54,7 +54,7 @@ isbet = -1
 # count how many times x5 appear in a row
 while(True):
     driver.refresh()
-    time.sleep(5)
+    # time.sleep(5)
     curRound = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
     logRound = list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
     
@@ -158,7 +158,7 @@ while(True):
                 except:
                     continue
         isbet = curRound
-        # time.sleep(5)
+        time.sleep(5)
     else:
         continue
     
