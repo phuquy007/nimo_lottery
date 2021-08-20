@@ -6,5 +6,7 @@
 types = ["x5", "x10", "x15", "x25", "x45"]
 breakpoints = {"x5": 200, "x10": 150, "x15": 100, "x25": 80, "x45": 50}
 
-for i in range (0, 1):
-    print ("test")
+for i in range(1, 4):
+    print("loop " + str(i))
+    for i in range (2):
+        print ("test")

@@ -82,9 +82,19 @@ while(True):
                 chosenBox.append("x45")    
             print("x5 appear " + str(isX5OccurAlot()) + " times in a row")
 
-        if isX50notAppear() > 3:
-            for i in range(3, isX50notAppear()+1):
+        if isX50notAppear >= 5:
+            for i in range(40):
                 chosenBox.append("x5")
+        if isX50notAppear == 4:
+            for i in range(20):
+                chosenBox.append("x5")
+        if isX50notAppear == 3:
+            for i in range(10):
+                chosenBox.append("x5")
+
+        # if isX50notAppear() > 3:
+        #     for i in range(3, isX50notAppear()+1):
+        #         chosenBox.append("x5")
 
         sortedCollection = list(boxCollection.find({}).sort("time",-1))
         for type in types:
@@ -94,13 +104,13 @@ while(True):
             occurDiff = curPos - baseOccur
             distanceDiffPecent = round(occurDiff/baseOccur * 100, 3)
             print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
-            if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
-                percentTimes = round(distanceDiffPecent / breakPoints[type])
-                print("Percent Times:" + str(percentTimes))
-                for i in range(0, percentTimes):
-                    chosenBox.append(type)
-        if len(chosenBox) <= 1:
-            chosenBox.append("x5")
+            # if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
+            #     percentTimes = round(distanceDiffPecent / breakPoints[type])
+            #     print("Percent Times:" + str(percentTimes))
+            #     for i in range(0, percentTimes):
+            #         chosenBox.append(type)
+        # if len(chosenBox) <= 1:
+        #     chosenBox.append("x5")
         print("Current Round: " + str(curRound))
         for box in chosenBox:
             print(box)
@@ -147,7 +157,7 @@ while(True):
                 except:
                     continue
         isbet = curRound
-        time.sleep(15)
+        # time.sleep(5)
     else:
         continue
     
