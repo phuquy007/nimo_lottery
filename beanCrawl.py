@@ -92,11 +92,11 @@ def BoxX50AppearFor():
             return counter
     return counter
 
-def BoxAppearInRow(input):
+def BoxAppearInRow(inputBox):
     counter = 0
     lastestBoxes = list(boxCollection.find().sort("time",-1).limit(30))
     for box in lastestBoxes:
-        if box["box"] == input:
+        if box["box"] == inputBox:
             counter += 1
         else:
             return counter
@@ -110,14 +110,14 @@ def minMaxAppear(minOrMax, inputBox):
     count = 0
     for box in allBoxes:
         if(minOrMax.lower() == max):
-            if box["box"] == inputBox["box"]:
+            if box["box"] == inputBox:
                 count += 1
                 if count > result:
                     result = count
             else:
                 count = 0
         else:
-            if box["box"] != inputBox["box"]:
+            if box["box"] != inputBox:
                 count += 1
                 if count > result:
                     result = count
@@ -146,7 +146,7 @@ def pushCalculation():
         percentageDiff = curPercentage - basePercentage
         baseAppear = 100/basePercentage
         notAppearFor = BoxNotAppear(box)
-        appearFor = BoxAppearInRow(box["box"])
+        appearFor = BoxAppearInRow(box)
         appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
         boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
         "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minMaxAppear("min", box), "maxAppear": minMaxAppear("max", box),
