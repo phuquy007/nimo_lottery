@@ -25,7 +25,7 @@ NOPRIZE = "no-prize-box"
 BOXES = ["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8"]
 
 def GenerateBreakPoints():
-    breakPoints = {"box1": 200, "box2": 200, "box3": 200, "box4": 200, "box5": 180, "box6": 160, "box7": 140, "box8":120}
+    breakPoints = {"box1": 20, "box2": 20, "box3": 20, "box4": 20, "box5": 30, "box6": 50, "box7": 70, "box8":100}
     return breakPoints
 
 def GetBreakPoint():
@@ -61,9 +61,9 @@ def GetCurBoxPercentage(input):
     return counter
 
 # Return the number of times a box not appear
-def BoxNotAppear(box):
-    lastestBoxAppear = list(boxCollection.find({"box": box}).sort("time", -1).limit(1))
-    return int(GetCurRound()) - int(lastestBoxAppear[0]["round"]) -1
+def BoxNotAppear(inputBox):
+    lastestBoxAppear = list(boxCollection.find({"box": inputBox}).sort("time", -1).limit(1))
+    return int(GetCurRound()) - int(lastestBoxAppear[0]["round"]) - 1
 
 def PrintBoxesCalculation(boxesCalculation):
     for box in boxesCalculation:
