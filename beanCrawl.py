@@ -102,6 +102,29 @@ def BoxAppearInRow(input):
             return counter
     return counter
 
+# Get the max appear of a box: called max
+# Get the max not appear of a box: called min
+def minMaxAppear(minOrMax, inputBox):
+    allBoxes = boxCollection.find()
+    result = 0
+    count = 0
+    for box in allBoxes:
+        if(minOrMax.lower() == max):
+            if box["box"] == inputBox["box"]:
+                count += 1
+                if count > result:
+                    result = count
+            else:
+                count = 0
+        else:
+            if box["box"] != inputBox["box"]:
+                count += 1
+                if count > result:
+                    result = count
+            else:
+                count = 0
+    return result
+
 def Add1stRow(chosenBox):
     for i in range (1, 5):
         chosenBox.append("box"+str(i))
@@ -110,6 +133,8 @@ def Add2ndRow(chosenBox):
     for i in range (5, 9):
         chosenBox.append("box"+str(i))
 
+
+# add more calculate the max not appear, max appear, curNotAppear, curAppear for each box and also for row
 def pushCalculation():
     totalCount = boxCollection.count_documents({})
     BoxesCalculation = {}
@@ -121,18 +146,18 @@ def pushCalculation():
         percentageDiff = curPercentage - basePercentage
         baseAppear = 100/basePercentage
         notAppearFor = BoxNotAppear(box)
+        appearFor = BoxAppearInRow(box["box"])
         appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
         boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
-        "baseAppear": baseAppear, "notAppearFor": notAppearFor, "appearDiffPercentage": appearDiffPercentage, "time": datetime.now()}
+        "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minMaxAppear("min", box), "maxAppear": minMaxAppear("max", box),
+         "appearDiffPercentage": appearDiffPercentage, "time": datetime.now()}
         BoxesCalculation[box] = boxCalculation
         breakPoints = GetBreakPoint()
    
     calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
     "breakPoints": breakPoints})
 
-    # calculationCollection.insert_one({GetCurRound:{boxes: BoxesCalculation}})
-    # PrintBoxesCalculation(BoxesCalculation)
-
+    print(boxCalculation)
 
 round = None
 while(True):
@@ -153,6 +178,7 @@ while(True):
         round = curRound
         newBox = {"round": round, "box": prizebox, "time": datetime.now()}
         pushToMongo(newBox)
-        pushCalculation()
         print("Round: " + round +" - box: " + str(prizebox))
+        pushCalculation()
+       
         time.sleep(5)

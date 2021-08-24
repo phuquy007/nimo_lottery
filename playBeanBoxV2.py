@@ -33,6 +33,14 @@ def GetCurRound():
 def GetLastestLogRound():
     return list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
 
+
+# Check these case to choose the box to play
+# 1 - If the second row appear for more than 3 times in row, play the 1st row until win
+# 2 - If the 1st row appear for more than 15 times in row, play the 2nd row until win
+
+
+
+
 def Play(chosenBox):
     for box in chosenBox:
         print(box)
@@ -44,7 +52,6 @@ def Play(chosenBox):
                 print("Box 1 Clicked")
             except:
                 continue
-        
     
     
 
