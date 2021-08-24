@@ -29,7 +29,10 @@ def GenerateBreakPoints():
     return breakPoints
 
 def GetBreakPoint():
-    document = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+    try:
+        document = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+    except:
+        return GenerateBreakPoints()
     if(document["breakPoints"]):
         return document["breakPoints"]
     else:
