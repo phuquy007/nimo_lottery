@@ -54,7 +54,7 @@ isbet = -1
 # count how many times x5 appear in a row
 while(True):
     driver.refresh()
-    # time.sleep(5)
+    time.sleep(5)
     curRound = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
     logRound = list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
     
@@ -74,8 +74,8 @@ while(True):
         except:
             continue
         chosenBox = []
-        if isX5OccurAlot() >= 13:
-            for i in range (13, isX5OccurAlot()+1):
+        if isX5OccurAlot() >= 15:
+            for i in range (15, isX5OccurAlot()+1):
                 for i in range(4):
                     chosenBox.append("x10")
                     chosenBox.append("x15")
@@ -104,7 +104,7 @@ while(True):
             baseOccur = 100 / basePercent
             occurDiff = curPos - baseOccur
             distanceDiffPecent = round(occurDiff/baseOccur * 100, 3)
-            print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
+            # print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
             # if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
             #     percentTimes = round(distanceDiffPecent / breakPoints[type])
             #     print("Percent Times:" + str(percentTimes))
@@ -113,7 +113,7 @@ while(True):
         # if len(chosenBox) <= 1:
         #     chosenBox.append("x5")
         print("Current Round: " + str(curRound))
-        if(not chosenBox):
+        if(len(chosenBox) == 0):
             continue
         for box in chosenBox:
             print(box)
