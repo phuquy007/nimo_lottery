@@ -105,27 +105,30 @@ def BoxAppearInRow(inputBox):
             return counter
     return counter
 
-# Get the max appear of a box: called max
-# Get the max not appear of a box: called min
-def minMaxAppear(minOrMax, inputBox):
-    allBoxes = boxCollection.find()
+def minBox(inputBox):
+    allBoxes = boxCollection.find({}).sort("time", -1)
     result = 0
     count = 0
     for box in allBoxes:
-        if(minOrMax.lower() == max):
-            if box["box"] == inputBox:
-                count += 1
-                if count > result:
-                    result = count
-            else:
-                count = 0
+        if box["box"] != inputBox:
+            count += 1
+            if count > result:
+                result = count
         else:
-            if box["box"] != inputBox:
-                count += 1
-                if count > result:
-                    result = count
-            else:
-                count = 0
+            count = 0
+    return result
+
+def maxBox(inputBox):
+    allBoxes = boxCollection.find({}).sort("time", -1)
+    result = 0
+    count = 0
+    for box in allBoxes:
+        if box["box"] == inputBox:
+            count += 1
+            if count > result:
+                result = count
+        else:
+            count = 0
     return result
 
 def Add1stRow(chosenBox):
@@ -152,7 +155,7 @@ def pushCalculation():
         appearFor = BoxAppearInRow(box)
         appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
         boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
-        "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minMaxAppear("min", box), "maxAppear": minMaxAppear("max", box),
+        "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minBox(box), "maxAppear": maxBox(box),
          "appearDiffPercentage": appearDiffPercentage}
         BoxesCalculation[box] = boxCalculation
         breakPoints = GetBreakPoint()
