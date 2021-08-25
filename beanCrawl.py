@@ -1,5 +1,3 @@
-from typing import Counter
-from playBeanBoxV2 import GetCurRound
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -27,8 +25,18 @@ NOPRIZE = "no-prize-box"
 BOXES = ["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8"]
 
 def GenerateBreakPoints():
-    breakPoints = {"box1": 100, "box2": 100, "box3": 100, "box4": 100, "box5": 80, "box6": 60, "box7": 40, "box8":20}
+    breakPoints = {"box1": 20, "box2": 20, "box3": 20, "box4": 20, "box5": 30, "box6": 50, "box7": 70, "box8":100}
     return breakPoints
+
+def GetBreakPoint():
+    try:
+        document = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+    except:
+        return GenerateBreakPoints()
+    if(document["breakPoints"]):
+        return document["breakPoints"]
+    else:
+        return GenerateBreakPoints()
 
 # Return the current Round
 def GetCurRound():
@@ -53,9 +61,9 @@ def GetCurBoxPercentage(input):
     return counter
 
 # Return the number of times a box not appear
-def BoxNotAppear(box):
-    lastestBoxAppear = list(boxCollection.find({"box": box}).sort("time", -1).limit(1))
-    return int(GetCurRound()) - int(lastestBoxAppear[0]["round"]) -1
+def BoxNotAppear(inputBox):
+    lastestBoxAppear = list(boxCollection.find({"box": inputBox}).sort("time", -1).limit(1))
+    return int(GetCurRound()) - int(lastestBoxAppear[0]["round"]) - 1
 
 def PrintBoxesCalculation(boxesCalculation):
     for box in boxesCalculation:
@@ -87,36 +95,72 @@ def BoxX50AppearFor():
             return counter
     return counter
 
-def BoxAppearInRow(input):
+def BoxAppearInRow(inputBox):
     counter = 0
     lastestBoxes = list(boxCollection.find().sort("time",-1).limit(30))
     for box in lastestBoxes:
-        if box["box"] == input:
+        if box["box"] == inputBox:
             counter += 1
         else:
             return counter
     return counter
 
+# Get the max appear of a box: called max
+# Get the max not appear of a box: called min
+def minMaxAppear(minOrMax, inputBox):
+    allBoxes = boxCollection.find()
+    result = 0
+    count = 0
+    for box in allBoxes:
+        if(minOrMax.lower() == max):
+            if box["box"] == inputBox:
+                count += 1
+                if count > result:
+                    result = count
+            else:
+                count = 0
+        else:
+            if box["box"] != inputBox:
+                count += 1
+                if count > result:
+                    result = count
+            else:
+                count = 0
+    return result
+
+def Add1stRow(chosenBox):
+    for i in range (1, 5):
+        chosenBox.append("box"+str(i))
+
+def Add2ndRow(chosenBox):
+    for i in range (5, 9):
+        chosenBox.append("box"+str(i))
+
+
+# add more calculate the max not appear, max appear, curNotAppear, curAppear for each box and also for row
 def pushCalculation():
     totalCount = boxCollection.count_documents({})
-    BoxesCalculation = []
+    BoxesCalculation = {}
     
     for box in BOXES:
-        basePercentage = round(boxCollection.count_documents({"box": box})/totalCount * 100, 2)
+        curCount = boxCollection.count_documents({"box": box})
+        basePercentage = curCount/totalCount * 100
         curPercentage = GetCurBoxPercentage(box)
         percentageDiff = curPercentage - basePercentage
-        baseAppear = round(100/basePercentage, 2)
+        baseAppear = 100/basePercentage
         notAppearFor = BoxNotAppear(box)
-        appearDiffPercentage = round((notAppearFor - baseAppear) / baseAppear, 2)
-        boxCalculation = {"box": box, "basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
-        "baseOccur": baseAppear, "notOccurFor": notAppearFor, "occurDiffPercentage": appearDiffPercentage}
-        BoxesCalculation.append(boxCalculation)
-        breakPoints = GenerateBreakPoints()
-    calculationCollection.insert_one({GetCurRound:{boxes: BoxesCalculation}, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
+        appearFor = BoxAppearInRow(box)
+        appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
+        boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
+        "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minMaxAppear("min", box), "maxAppear": minMaxAppear("max", box),
+         "appearDiffPercentage": appearDiffPercentage, "time": datetime.now()}
+        BoxesCalculation[box] = boxCalculation
+        breakPoints = GetBreakPoint()
+   
+    calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
     "breakPoints": breakPoints})
 
-    PrintBoxesCalculation(BoxesCalculation)
-
+    print(boxCalculation)
 
 round = None
 while(True):
@@ -137,6 +181,7 @@ while(True):
         round = curRound
         newBox = {"round": round, "box": prizebox, "time": datetime.now()}
         pushToMongo(newBox)
-        pushCalculation()
         print("Round: " + round +" - box: " + str(prizebox))
+        pushCalculation()
+       
         time.sleep(5)
