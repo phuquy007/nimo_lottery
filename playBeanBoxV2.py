@@ -89,6 +89,8 @@ def GetLastestLogRound():
 #             except:
 #                 continue
 def Bet(betBox, betAmount):
+    print(f'Last Log Round: {GetLastestLogRound()}')
+    print(f'Now bet for Roud: {GetCurRound()}')
     curID = -1
     try:
         bets = list(BetHistory.find({"Round": GetCurRound()}).sort("Time", -1))
