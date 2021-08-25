@@ -95,6 +95,34 @@ def BoxX50AppearFor():
             return counter
     return counter
 
+def max1stRow():
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0 
+    time = 0
+    for box in allBoxes:
+        if box["box"] == "box1" or box["box"] == "box2" or box["box"] == "box3" or box["box"] == "box4":
+            count += 1
+            if count > result:
+                result = count
+        else:
+            count = 0
+    return result
+
+def max2ndRow():
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0 
+    time = 0
+    for box in allBoxes:
+        if box["box"] == "box5" or box["box"] == "box6" or box["box"] == "box7" or box["box"] == "box8":
+            count += 1
+            if count > result:
+                result = count
+        else:
+            count = 0
+    return result
+
 def BoxAppearInRow(inputBox):
     counter = 0
     lastestBoxes = list(boxCollection.find().sort("time",-1).limit(30))
@@ -160,7 +188,7 @@ def pushCalculation():
         BoxesCalculation[box] = boxCalculation
         breakPoints = GetBreakPoint()
    
-    calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
+    calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation,"max1stRow": max1stRow(),"max2ndRow": max2ndRow(), "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
     "breakPoints": breakPoints, "time": datetime.now()})
 
     print(boxCalculation)
