@@ -15,56 +15,35 @@ boxCollection = db["BeanBoxesv2"]
 boxes = list(boxCollection.find({}).sort("time", -1))
 box = list(calculationCollection.find({}).sort("time", -1).limit(1))
 
-def minMaxAppear(minOrMax, inputBox):
-    allBoxes = boxCollection.find({})
-    result = 0
-    count = 0
-    for box in allBoxes:
-        if(minOrMax.lower() == max):
-            if box["box"] == inputBox:
-                count += 1
-                if count > result:
-                    result = count
-            else:
-                count = 0
-        else:
-            if box["box"] != inputBox:
-                count += 1
-                if count > result:
-                    result = count
-            else:
-                count = 0
-    return result
+print(box[0])
 
-def minBox(inputBox):
-    allBoxes = boxCollection.find({}).sort("time", -1)
-    result = 0
-    count = 0
-    for box in allBoxes:
-        if box["box"] != inputBox:
-            count += 1
-            if count > result:
-                result = count
-        else:
-            count = 0
-    return result
+# def minBox(inputBox):
+#     allBoxes = boxCollection.find({}).sort("time", -1)
+#     result = 0
+#     count = 0
+#     for box in allBoxes:
+#         if box["box"] != inputBox:
+#             count += 1
+#             if count > result:
+#                 result = count
+#         else:
+#             count = 0
+#     return result
 
-def maxBox(inputBox):
-    allBoxes = boxCollection.find({}).sort("time", -1)
-    result = 0
-    count = 0
-    for box in allBoxes:
-        if box["box"] == inputBox:
-            count += 1
-            if count > result:
-                result = count
-        else:
-            count = 0
-    return result
+# def maxBox(inputBox):
+#     allBoxes = boxCollection.find({}).sort("time", -1)
+#     result = 0
+#     count = 0
+#     for box in allBoxes:
+#         if box["box"] == inputBox:
+#             count += 1
+#             if count > result:
+#                 result = count
+#         else:
+#             count = 0
+#     return result
 
-print("Min box 1: " + str(minMaxAppear("min", "box1")) + " - Max box 1: " + str(minMaxAppear("max", "box1")))
 
-print("Min box 1: " + str(minBox("box1")) + " - Max box 1: " + str(maxBox("box1")))
 # max = 0
 # count = 0
 # times = 0
