@@ -9,13 +9,14 @@ CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["BeanAnalyst"]
-boxCollection = db["BeanBoxes"]
+boxCollection = db["BeanBoxesv2"]
 
 
-boxes = list(boxCollection.find({}).sort("time", 1))
+boxes = list(boxCollection.find({}).sort("time", -1).limit(1))
+box = list(calculationCollection.find({}).sort("time", -1).limit(1))
 
-calculationCollection.delete_many({})
-
+# print(boxes[0])
+print(box[0])
 # max = 0
 # count = 0
 # times = 0
