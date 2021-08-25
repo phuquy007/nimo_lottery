@@ -105,6 +105,8 @@ def Bet(betBox, betAmount):
     else:
         BetHistory.insert_one({"Round": GetCurRound(), "bets":{betBox: betAmount}, "Time": datetime.now()})
 
+def displayBetHistory():
+    print()
 
 isbet = -1
 isFollowing = Case.notFollowing
@@ -265,6 +267,7 @@ while(True):
             isFollowing = Case.notFollowing
 
         isbet = curRound
+        displayBetHistory()
         # time.sleep(5)
     else:
         continue
