@@ -17,18 +17,64 @@ box = list(calculationCollection.find({}).sort("time", -1).limit(1))
 
 print(box[0])
 
-# def minBox(inputBox):
-#     allBoxes = boxCollection.find({}).sort("time", -1)
-#     result = 0
-#     count = 0
-#     for box in allBoxes:
-#         if box["box"] != inputBox:
-#             count += 1
-#             if count > result:
-#                 result = count
-#         else:
-#             count = 0
-#     return result
+def minBox(inputBox):
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0
+    times = 0
+    for box in allBoxes:
+        if box["box"] != inputBox:
+            count += 1
+            if count > result:
+                result = count
+                print("Min : " + str(result) + " - Round: " + box["round"])
+        else:
+            if count > 40:
+                times += 1
+            count = 0
+    print(times)
+    return result
+
+def max1stRow():
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0 
+    time = 0
+    for box in allBoxes:
+        if box["box"] == "box1" or box["box"] == "box2" or box["box"] == "box3" or box["box"] == "box4":
+            count += 1
+            if count > result:
+                result = count
+        else:
+            if count > 50:
+                time += 1
+            count = 0
+    print(time)
+    return result
+
+def max2ndRow():
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0 
+    time = 0
+    for box in allBoxes:
+        if box["box"] == "box5" or box["box"] == "box6" or box["box"] == "box7" or box["box"] == "box8":
+            count += 1
+            if count > result:
+                result = count
+        else:
+            if count > 2:
+                time += 1
+            count = 0
+    print(time)
+    return result
+
+print(minBox("box6"))
+# print(minBox("box2"))
+
+# for box in boxes:
+#     if int(box["round"]) > 1711 and int(box["round"]) < 1755:
+#         print("Round: " + box["round"] + " - Box: " + box["box"])
 
 # def maxBox(inputBox):
 #     allBoxes = boxCollection.find({}).sort("time", -1)
