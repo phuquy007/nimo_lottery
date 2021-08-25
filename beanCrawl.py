@@ -153,12 +153,12 @@ def pushCalculation():
         appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
         boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
         "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minMaxAppear("min", box), "maxAppear": minMaxAppear("max", box),
-         "appearDiffPercentage": appearDiffPercentage, "time": datetime.now()}
+         "appearDiffPercentage": appearDiffPercentage}
         BoxesCalculation[box] = boxCalculation
         breakPoints = GetBreakPoint()
    
     calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation, "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
-    "breakPoints": breakPoints})
+    "breakPoints": breakPoints, "time": datetime.now()})
 
     print(boxCalculation)
 
