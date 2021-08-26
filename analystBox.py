@@ -355,31 +355,31 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box4", betAmount)
-            elif curRound == 211:
-                Bet(curRound, "box1", 50)
-                Bet(curRound, "box2", 50)
-                Bet(curRound, "box3", 50)
-                Bet(curRound, "box4", 50)
-                Bet(curRound, "box5", 50)
-                Bet(curRound, "box6", 50)
-                Bet(curRound, "box7", 50)
-                Bet(curRound, "box8", 50)
-            elif curRound == 212:
-                Bet(curRound, "box1", 50)
-            elif curRound == 213:
-                Bet(curRound, "box2", 100)
-            elif curRound == 214:
-                Bet(curRound, "box3", 150)
-            elif curRound == 215:
-                Bet(curRound, "box4", 200)
-            elif curRound == 216:
-                Bet(curRound, "box5", 250)
-            elif curRound == 217:
-                Bet(curRound, "box6", 300)
-            elif curRound == 218:
-                Bet(curRound, "box7", 350)
-            elif curRound == 219:
-                Bet(curRound, "box8", 400)
+            # elif curRound == 211:
+            #     Bet(curRound, "box1", 50)
+            #     Bet(curRound, "box2", 50)
+            #     Bet(curRound, "box3", 50)
+            #     Bet(curRound, "box4", 50)
+            #     Bet(curRound, "box5", 50)
+            #     Bet(curRound, "box6", 50)
+            #     Bet(curRound, "box7", 50)
+            #     Bet(curRound, "box8", 50)
+            # elif curRound == 212:
+            #     Bet(curRound, "box1", 50)
+            # elif curRound == 213:
+            #     Bet(curRound, "box2", 100)
+            # elif curRound == 214:
+            #     Bet(curRound, "box3", 150)
+            # elif curRound == 215:
+            #     Bet(curRound, "box4", 200)
+            # elif curRound == 216:
+            #     Bet(curRound, "box5", 250)
+            # elif curRound == 217:
+            #     Bet(curRound, "box6", 300)
+            # elif curRound == 218:
+            #     Bet(curRound, "box7", 350)
+            # elif curRound == 219:
+            #     Bet(curRound, "box8", 400)
             else:
                 isFollowing = Case.notFollowing
                 print(f'Round: {curRound} not bet!')

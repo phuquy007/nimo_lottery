@@ -30,15 +30,11 @@ def CalculateBetResult(round):
             win = "not win"
             winBet = 0
             totalBetDiamond = 0
-            # print(f'Round: {myBet["round"]}')
             for box, betAmt in myBet["bets"].items():
                 if(result["box"] == box):
                     win = box
                     winBet = betAmt
-                #     print(f'Box: {box} - Bet: {betAmt} -------- WIN')
-                # print(f'Box: {box} - Bet: {betAmt}')
                 totalBetDiamond += betAmt
-            # print(f'Total Bet: {totalBetDiamond}')
 
             if win != "not win":
                 if win == "box1" or win == "box2" or win == "box3" or win == "box4":
