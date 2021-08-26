@@ -4,6 +4,7 @@ import time
 import pymongo
 from pymongo import MongoClient
 from datetime import datetime
+from betResult import CalculateBetResult
 
 chrome_options = Options()
 
@@ -169,7 +170,7 @@ def Add2ndRow(chosenBox):
 
 
 # add more calculate the max not appear, max appear, curNotAppear, curAppear for each box and also for row
-def pushCalculation():
+def pushCalculation(round):
     totalCount = boxCollection.count_documents({})
     BoxesCalculation = {}
     
@@ -188,10 +189,12 @@ def pushCalculation():
         BoxesCalculation[box] = boxCalculation
         breakPoints = GetBreakPoint()
    
-    calculationCollection.insert_one({"Round": GetCurRound(), "Boxes": BoxesCalculation,"max1stRow": max1stRow(),"max2ndRow": max2ndRow(), "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
+    calculationCollection.insert_one({"Round": round, "Boxes": BoxesCalculation,"max1stRow": max1stRow(),"max2ndRow": max2ndRow(), "x50NotAppearFor": BoxX50NotAppearFor(), "x50AppearFor":BoxX50AppearFor(),
     "breakPoints": breakPoints, "time": datetime.now()})
 
     print(boxCalculation)
+    CalculateBetResult(round)
+
 
 round = None
 while(True):
@@ -213,6 +216,6 @@ while(True):
         newBox = {"round": round, "box": prizebox, "time": datetime.now()}
         pushToMongo(newBox)
         print("Round: " + round +" - box: " + str(prizebox))
-        pushCalculation()
+        pushCalculation(round)
        
         time.sleep(5)

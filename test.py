@@ -29,8 +29,8 @@ def getBetAmount(betCase, betTurn):
 # print(datetime.date().today())
 
 # boxes = list(boxCollection.find({}).sort("time", -1))
-# box = list(calculationCollection.find({}).sort("time", -1).limit(1))
-# print(box[0])
+box = list(calculationCollection.find({}).sort("time", -1).limit(1))
+print(box[0])
 
 # lastestBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
 # print(lastestBox["x50AppearFor"])
@@ -38,19 +38,27 @@ def getBetAmount(betCase, betTurn):
 
 # BetHistory.insert_one({"Round": 12, "bets": {"box1": 10, "box2": 20}, "Time":datetime.now()})
 
-try:
-    bets = list(BetHistory.find({"Round": 12}).sort("Time", -1))
-    for bet in bets:
-        if bet["Time"].date() == datetime.today().date():
-            curID = bet["_id"]
-except:
-    print(f'Round : {12} - Cannot Bet')
-if curID != -1:
-    updatingBet = BetHistory.find_one({"_id": curID})
-    newBets = updatingBet["bets"]
-    newBets["box3"] = 30
-    # print(newBets)
-    BetHistory.update_one({"_id": curID}, {"$set":{"bets":newBets}})
+# try:
+#     bets = list(BetHistory.find({"Round": 12}).sort("Time", -1))
+#     for bet in bets:
+#         if bet["Time"].date() == datetime.today().date():
+#             curID = bet["_id"]
+# except:
+#     print(f'Round : {12} - Cannot Bet')
+# if curID != -1:
+#     updatingBet = BetHistory.find_one({"_id": curID})
+#     newBets = updatingBet["bets"]
+#     newBets["box3"] = 30
+#     # print(newBets)
+#     BetHistory.update_one({"_id": curID}, {"$set":{"bets":newBets}})
+
+totalBetDiamond = 0
+myBet = list(BetHistory.find({}).sort("time", -1).limit(1))[0]
+
+# for box, betAmt in myBet["bets"].items():
+#     print(f'Box: {box} - Bet: {betAmt}')
+#     totalBetDiamond += betAmt
+# print(totalBetDiamond)
 
 def minBox(inputBox):
     allBoxes = boxCollection.find({}).sort("time", 1)

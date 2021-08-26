@@ -93,9 +93,9 @@ def Bet(betBox, betAmount):
     print(f'Now bet for Roud: {GetCurRound()}')
     curID = -1
     try:
-        bets = list(BetHistory.find({"Round": GetCurRound()}).sort("Time", -1))
+        bets = list(BetHistory.find({"round": GetCurRound()}).sort("time", -1))
         for bet in bets:
-            if bet["Time"].date() == datetime.today().date():
+            if bet["time"].date() == datetime.today().date():
                 curID = bet["_id"]
     except:
         print(f'Round : {GetCurRound()} - Cannot Bet')
@@ -105,10 +105,8 @@ def Bet(betBox, betAmount):
         newBets[betBox] = betAmount
         BetHistory.update_one({"_id": curID}, {"$set":{"bets":newBets}})
     else:
-        BetHistory.insert_one({"Round": GetCurRound(), "bets":{betBox: betAmount}, "Time": datetime.now()})
+        BetHistory.insert_one({"round": GetCurRound(), "bets":{betBox: betAmount}, "time": datetime.now()})
 
-def displayBetHistory():
-    print()
 
 isbet = -1
 isFollowing = Case.notFollowing
@@ -269,7 +267,7 @@ while(True):
             isFollowing = Case.notFollowing
 
         isbet = curRound
-        displayBetHistory()
+        
         # time.sleep(5)
     else:
         continue
