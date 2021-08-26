@@ -4,18 +4,53 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from datetime import date, datetime
 import time
+from readFile import readFile
 
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["BeanAnalyst"]
 boxCollection = db["BeanBoxesv2"]
+BetHistory = db["BetHistory"]
+
+x45Dict = readFile("x45 bet.csv")
+x45BreakPoint = x45Dict[0]["bet"]
+# print(x45BreakPoint)
+
+def getBetAmount(betCase, betTurn):
+    for item in x45Dict:
+        print(f'Turn: {item["turn"]} - Bet: {item["bet"]}')
+        if int(item["turn"]) == int(betTurn):
+            return item["bet"]
+    return -1
+
+# print(getBetAmount("", 153))
+
+# print(datetime.date().today())
+
+# boxes = list(boxCollection.find({}).sort("time", -1))
+# box = list(calculationCollection.find({}).sort("time", -1).limit(1))
+# print(box[0])
+
+# lastestBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+# print(lastestBox["x50AppearFor"])
 
 
-boxes = list(boxCollection.find({}).sort("time", -1))
-box = list(calculationCollection.find({}).sort("time", -1).limit(1))
+# BetHistory.insert_one({"Round": 12, "bets": {"box1": 10, "box2": 20}, "Time":datetime.now()})
 
-print(box[0])
+try:
+    bets = list(BetHistory.find({"Round": 12}).sort("Time", -1))
+    for bet in bets:
+        if bet["Time"].date() == datetime.today().date():
+            curID = bet["_id"]
+except:
+    print(f'Round : {12} - Cannot Bet')
+if curID != -1:
+    updatingBet = BetHistory.find_one({"_id": curID})
+    newBets = updatingBet["bets"]
+    newBets["box3"] = 30
+    # print(newBets)
+    BetHistory.update_one({"_id": curID}, {"$set":{"bets":newBets}})
 
 def minBox(inputBox):
     allBoxes = boxCollection.find({}).sort("time", 1)
@@ -29,7 +64,24 @@ def minBox(inputBox):
                 result = count
                 print("Min : " + str(result) + " - Round: " + box["round"])
         else:
-            if count > 40:
+            if count > 20:
+                times += 1
+            count = 0
+    print(times)
+    return result
+
+def maxBox(inputBox):
+    allBoxes = boxCollection.find({}).sort("time", -1)
+    result = 0
+    count = 0
+    times = 0
+    for box in allBoxes:
+        if box["box"] == inputBox:
+            count += 1
+            if count > result:
+                result = count
+        else:
+            if count > 2:
                 times += 1
             count = 0
     print(times)
@@ -46,7 +98,7 @@ def max1stRow():
             if count > result:
                 result = count
         else:
-            if count > 50:
+            if count > 15:
                 time += 1
             count = 0
     print(time)
@@ -63,49 +115,11 @@ def max2ndRow():
             if count > result:
                 result = count
         else:
-            if count > 2:
+            if count > 3:
                 time += 1
             count = 0
     print(time)
     return result
 
-print(minBox("box6"))
+# print(max1stRow())
 # print(minBox("box2"))
-
-# for box in boxes:
-#     if int(box["round"]) > 1711 and int(box["round"]) < 1755:
-#         print("Round: " + box["round"] + " - Box: " + box["box"])
-
-# def maxBox(inputBox):
-#     allBoxes = boxCollection.find({}).sort("time", -1)
-#     result = 0
-#     count = 0
-#     for box in allBoxes:
-#         if box["box"] == inputBox:
-#             count += 1
-#             if count > result:
-#                 result = count
-#         else:
-#             count = 0
-#     return result
-
-
-# max = 0
-# count = 0
-# times = 0
-# for box in boxes:
-#     if box["type"] != "x5":
-#         count += 1
-#         if(count > max):
-#             max = count
-#             print("cur Max: " + str(max) +" Round: " + box["round"] + " Time: " + str(box["time"]))
-#     else:
-#         if count > 2:
-#             times += 1
-#         count = 0
-
-# print("Min x5: " + str(max) + " Happen: " + str(times))
-# for box in boxes:
-#     if int(box["round"]) > 704 and int(box["round"]) < 739 :
-
-#         print("Round: " + box["round"] + " Type:" + box["type"] + " Time: " + str(box["time"]))
