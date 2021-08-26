@@ -12,6 +12,7 @@ db = client["NimoLottery"]
 calculationCollection = db["BeanAnalyst"]
 boxCollection = db["BeanBoxesv2"]
 BetHistory = db["BetHistory"]
+Emulator = db["GameEmulation"]
 
 x45Dict = readFile("x45 bet.csv")
 x45BreakPoint = x45Dict[0]["bet"]
@@ -28,9 +29,16 @@ def getBetAmount(betCase, betTurn):
 
 # print(datetime.date().today())
 
-# boxes = list(boxCollection.find({}).sort("time", -1))
-box = list(calculationCollection.find({}).sort("time", -1).limit(1))
-print(box[0])
+boxes = list(boxCollection.find({}).sort("time", -1))
+print(boxes[0])
+# print(boxes[1])
+# box = list(calculationCollection.find({}).sort("time", -1).limit(2))
+# print(box[0])
+# print(box[1])
+
+# print(list(BetHistory.find({"round": 138}).sort("time", -1).limit(1))[0])
+# myDiamond = Emulator.find_one({"id": "quytran"})
+# print(myDiamond["diamond"])
 
 # lastestBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
 # print(lastestBox["x50AppearFor"])
