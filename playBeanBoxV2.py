@@ -77,17 +77,6 @@ def GetCurRound():
 def GetLastestLogRound():
     return list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
 
-# def Play(chosenBox):
-#     for box in chosenBox:
-#         print(box)
-#     for box in chosenBox:
-#         if "box1" in box:
-#             try:
-#                 box1.click()
-#                 time.sleep(0.5)
-#                 print("Box 1 Clicked")
-#             except:
-#                 continue
 def Bet(betBox, betAmount):
     print(f'Last Log Round: {GetLastestLogRound()}')
     print(f'Now bet for Roud: {GetCurRound()}')
