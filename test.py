@@ -36,7 +36,9 @@ def getBetAmount(betCase, betTurn):
 # print(box[0])
 # print(box[1])
 
-# print(list(BetHistory.find({"round": 138}).sort("time", -1).limit(1))[0])
+boxes = list(boxCollection.find({}).sort("time", -1))
+print(boxes[0])
+print(list(BetHistory.find({}).sort("time", -1).limit(1))[0])
 myDiamond = Emulator.find_one({"id": "quytran"})
 print(myDiamond["diamond"])
 

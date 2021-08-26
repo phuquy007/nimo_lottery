@@ -36,13 +36,16 @@ time.sleep(0.5)
 
 signin_window_handle = None
 while not signin_window_handle:
-    for handle in driver.window_handles
+    for handle in driver.window_handles:
+        if handle != main_window_handle:
+            signin_window_handle = handle
+            break
 
-try:
-    loginForm = driver.find_element_by_xpath("//*[@class='nimo-login-content-wrapper']")
-    googleLogin  = driver.find_element_by_xpath("//*[@class='imo-login-body-third-login__item']")
-    googleLogin.click()
-    if loginForm:
-        print("Please log in")
-except:
-    print()
+driver.switch_to_window(signin_window_handle)
+loginForm = driver.find_element_by_xpath("//*[@class='nimo-login-content-wrapper']")
+areaCode = driver.find_element_by_xpath("//*[@class='nimo-login-body-area-code']")
+phoneNumber = driver.find_element_by_xpath("//*[@class='phone-number-input']")
+password = driver.find_element_by_xpath("//*[text()='Enter Password']")
+loginButton = driver.find_element_by_xpath("//*[@class='nimo-login-body-button']")
+
+driver.switch_to_window(main_window_handle)
