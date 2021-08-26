@@ -8,7 +8,7 @@ from datetime import datetime
 chrome_options = Options()
 
 chrome_options.add_argument("--window-size=10x10")  
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="chromedriver.exe")
 
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)

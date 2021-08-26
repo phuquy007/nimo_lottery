@@ -1,0 +1,47 @@
+nimo-box-lottery__box nimo-box-lottery__sudoku-box nimo-box-lottery__last-result__box
+
+prize-box
+
+
+while(True):
+   try:
+      driver.find_element_by_xpath('//*[@title="Day enabled"]').click()
+      driver.refresh()
+      alert.accept()
+      break
+   except Exception as e:
+      driver.refresh()
+      continue
+	  
+	  
+	  
+	  
+	  
+0868242751
+ahihiahihi888
+
+521 405 991
+
+ryantran.tech
+trantran2312
+
+
+vpswala.org
+phuquy2406@gmail.com
+trantran2312
+
+
+ionos.ca
+eee443a.online-server.cloud
+74.208.54.247
+root
+9y#E_iqyAo
+
+kamatera
+phuquy2406@gmail
+trantran2312 
+promo code: 1MONTH300
+
+hostwinds.com
+phuquy2406@gmail
+trantran2312
