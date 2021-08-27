@@ -26,7 +26,7 @@ chrome_options.add_argument("--window-size=800x600")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
 url = 'https://www.nimo.tv/mkt/act/super/bean_box_lottery'
 driver.get(url)
-time.sleep(2)
+time.sleep(15)
 
 class Case(Enum):
     x45 = 1
@@ -216,19 +216,19 @@ def Bet(round, betBox, betAmount):
 
 
 isbet = -1
+isNotBet = -1
 isFollowing = Case.notFollowing
 isBoxCalculated = False
 while(True):
     # driver.refresh()
     # time.sleep(5)
 
-    calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
-    lastLogBox = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
-    if calculatedBox["round"] != lastLogBox["round"] and calculatedBox["time"].date() != lastLogBox["time"].date():
-        pushCalculation(lastLogBox["round"])
-        isBoxCalculated = True
-        time.sleep(1)
-    
+    # calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+    # lastLogBox = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
+    # if calculatedBox["round"] != lastLogBox["round"]:
+    #     pushCalculation(lastLogBox["round"])
+    #     isBoxCalculated = True
+    #     time.sleep(1)
     
     curRound = int(GetCurRound())
     betRound = int(GetLastestcalculationBox())
@@ -241,23 +241,23 @@ while(True):
         lastestBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
 
         # Case 1: bet the x45 box
-        x45Turn = int(lastestBox["Boxes"]["box8"]["notAppearFor"]) + 1
-        x25Turn = int(lastestBox["Boxes"]["box7"]["notAppearFor"]) + 1
-        x15Turn = int(lastestBox["Boxes"]["box6"]["notAppearFor"]) + 1
-        x10Turn = int(lastestBox["Boxes"]["box5"]["notAppearFor"]) + 1
+        x45Turn = int(lastestBox["boxes"]["box8"]["notAppearFor"]) + 1
+        x25Turn = int(lastestBox["boxes"]["box7"]["notAppearFor"]) + 1
+        x15Turn = int(lastestBox["boxes"]["box6"]["notAppearFor"]) + 1
+        x10Turn = int(lastestBox["boxes"]["box5"]["notAppearFor"]) + 1
 
         row2Turn = int(lastestBox["x50AppearFor"]) + 1
         row1AllTurn = int(lastestBox["x50NotAppearFor"]) + 1
         
-        box1NotAppear = int(lastestBox["Boxes"]["box1"]["notAppearFor"]) + 1
-        box2NotAppear = int(lastestBox["Boxes"]["box2"]["notAppearFor"]) + 1
-        box3NotAppear = int(lastestBox["Boxes"]["box3"]["notAppearFor"]) + 1
-        box4NotAppear = int(lastestBox["Boxes"]["box4"]["notAppearFor"]) + 1
+        box1NotAppear = int(lastestBox["boxes"]["box1"]["notAppearFor"]) + 1
+        box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + 1
+        box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + 1
+        box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + 1
 
-        Box1Appear = int(lastestBox["Boxes"]["box1"]["appearFor"]) + 1
-        Box2Appear = int(lastestBox["Boxes"]["box2"]["appearFor"]) + 1
-        Box3Appear = int(lastestBox["Boxes"]["box3"]["appearFor"]) + 1
-        Box4Appear = int(lastestBox["Boxes"]["box4"]["appearFor"]) + 1
+        Box1Appear = int(lastestBox["boxes"]["box1"]["appearFor"]) + 1
+        Box2Appear = int(lastestBox["boxes"]["box2"]["appearFor"]) + 1
+        Box3Appear = int(lastestBox["boxes"]["box3"]["appearFor"]) + 1
+        Box4Appear = int(lastestBox["boxes"]["box4"]["appearFor"]) + 1
 
         if x45Turn >= int(x45BreakPoint):
             if isFollowing == Case.notFollowing or isFollowing == Case.x45:
@@ -376,6 +376,9 @@ while(True):
         isbet = curRound
         CalculateBetResult(betRound)
         # time.sleep(5)
+    elif isNotBet != curRound:
+        print(f'Round {curRound} not bet')
+        isNotBet = curRound
     else:
         continue
     

@@ -4,6 +4,7 @@ import time
 import pymongo
 from pymongo import MongoClient
 from datetime import datetime
+from analystBox import pushCalculation
 from betResult import CalculateBetResult
 
 chrome_options = Options()
@@ -55,5 +56,12 @@ while(True):
         newBox = {"round": round, "box": prizebox, "time": datetime.now()}
         pushToMongo(newBox)
         print("Round: " + round +" - box: " + str(prizebox))
-       
+        
+        calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+        lastLogBox = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
+        if calculatedBox["round"] != lastLogBox["round"]:
+            pushCalculation(lastLogBox["round"])
+            isBoxCalculated = True
+            
+
         time.sleep(5)
