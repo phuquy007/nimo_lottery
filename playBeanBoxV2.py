@@ -269,7 +269,7 @@ while(True):
     curRound = int(GetCurRound())
     betRound = int(GetLastestcalculationBox())
     
-    if(curRound != isbet and curRound != betRound):
+    if(curRound != isbet and (curRound == betRound + 1 or curRound == 1 and betRound == 2160)):
         
         chosenBox = []
         # Add box to play

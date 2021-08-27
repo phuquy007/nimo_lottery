@@ -34,7 +34,7 @@ def BoxNotAppear(inputBox):
     if (lastLogRound < lastestBoxAppear):
         result = (lastLogRound - 1) + (2160 - lastestBoxAppear)
     else:
-        result = lastLogRound - lastestBoxAppear - 1
+        result = lastLogRound - lastestBoxAppear
     return result
 
 def BoxX50NotAppearFor(lastest100):
