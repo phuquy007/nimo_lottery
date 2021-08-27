@@ -58,7 +58,6 @@ time.sleep(0.5)
 
 checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
 confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
-# close = driver.find_element_by_xpath("//*[@class='nimo-box-lottery__modal-close']")
 
 checkbox.click()
 time.sleep(0.2)

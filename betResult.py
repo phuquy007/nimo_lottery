@@ -24,6 +24,7 @@ def CalculateBetResult(round):
         myDiamondID = "quytran"
         myDiamond = int(Emulator.find_one({"id": myDiamondID})["diamond"])
         myBet = list(BetHistory.find({"round": int(round)}).sort("time", -1).limit(1))[0]
+        # print(f'Round {myBet["round"]} bet {myBet["bets"]}')
         result = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
 
         if int(myBet["round"]) == int(result["round"]):
@@ -64,7 +65,7 @@ def CalculateBetResult(round):
             
             return "success"
         else:
-            print(f'Round different: bet round {round} - result round {result["round"]}')
+            print(f'{round} is not bet')
             return "fail"
     except Exception as error:
         # print(error)
