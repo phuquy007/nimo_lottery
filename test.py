@@ -29,11 +29,11 @@ def getBetAmount(betCase, betTurn):
 
 # print(datetime.date().today())
 
-boxes = list(boxCollection.find({}).sort("time", -1))
-print(boxes[0])
-# print(boxes[1])
-box = list(calculationCollection.find({}).sort("time", -1).limit(2))
-print(box[0])
+# boxes = list(boxCollection.find({}).sort("time", -1))
+# print(boxes[0])
+# # print(boxes[1])
+# box = list(calculationCollection.find({}).sort("time", -1).limit(2))
+# print(box[0])
 # print(box[1])
 
 # boxes = list(boxCollection.find({}).sort("time", -1))
@@ -143,3 +143,11 @@ def max2ndRow():
 
 # print(max1stRow())
 # print(minBox("box2"))
+
+round = 302
+myBet = list(BetHistory.find({"round": int(round-1)}).sort("time", -1).limit(1))[0]
+result = list(boxCollection.find({"round": str(round)}).sort("time", -1).limit(1))[0]
+print(myBet)
+print(result)
+if(myBet["time"].date() == result["time"].date()):
+    print("Equal")
