@@ -116,7 +116,7 @@ def pushCalculation(round):
     BoxesCalculation = {}
     
     lastest100 = list(boxCollection.find().sort("time",-1).limit(100))
-    allBoxes = boxCollection.find({}).sort("time", -1)
+    allBoxes = list(boxCollection.find({}).sort("time", -1))
 
     for box in BOXES:
         curCount = boxCollection.count_documents({"box": box})

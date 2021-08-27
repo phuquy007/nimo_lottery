@@ -29,8 +29,8 @@ def getBetAmount(betCase, betTurn):
 
 # print(datetime.date().today())
 
-# boxes = list(boxCollection.find({}).sort("time", -1))
-# print(boxes[0])
+boxes = list(boxCollection.find({}).sort("time", -1))
+print(boxes[0])
 # print(boxes[1])
 box = list(calculationCollection.find({}).sort("time", -1).limit(2))
 print(box[0])
@@ -121,6 +121,8 @@ def max1stRow():
             count = 0
     print(time)
     return result
+
+
 
 def max2ndRow():
     allBoxes = boxCollection.find({}).sort("time", 1)
