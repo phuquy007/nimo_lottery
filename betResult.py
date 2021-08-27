@@ -59,7 +59,7 @@ def CalculateBetResult(round):
                 print("------------------------------------------------------------------------------------")
 
             Emulator.update_one({"id": myDiamondID}, {"$set":{"diamond": myDiamond}})
-            document = {"round": myBet["round"], "bets": myBet["bets"], "result": win, "my diamond": myDiamond}
+            document = {"round": myBet["round"], "bets": myBet["bets"], "result": win, "my diamond": myDiamond, "time": datetime.now()}
             Emulator.insert_one(document)
             
             return "success"

@@ -1,4 +1,3 @@
-from os import getcwd
 import pymongo
 from pymongo import MongoClient
 from selenium import webdriver
