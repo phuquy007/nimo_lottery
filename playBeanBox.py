@@ -18,150 +18,52 @@ chrome_options.add_argument("--window-size=10x10")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
 url = 'https://www.nimo.tv/mkt/act/super/bean_box_lottery'
 driver.get(url)
-time.sleep(20)
+time.sleep(15)
 
-totalCount = boxCollection.count_documents({})
+# try:
+box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
+box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
+box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
+box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
+box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
+box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
+box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
-types = ["x5", "x10", "x15", "x25", "x45"]
-breakPoints = {"x5": 200, "x10": 200, "x15": 150, "x25": 100, "x45": 80}
+key50 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[1]")
+key500 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
+key1k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[3]")
+key5k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[4]")
 
-# 8 times x1 box
-# 9 times x1 box
-# 10 times x2 box
-# 11 times x4 box
-# 12 times x8 box
-def isX50notAppear():
-    notX5Count = 0
-    lastestBoxes = list(boxCollection.find().sort("time",-1).limit(10))
-    for box in lastestBoxes:
-        if box["type"] != "x5":
-            notX5Count += 1
-        else:
-            return notX5Count
-    return notX5Count
+main_window_handle = None
+while not main_window_handle:
+    main_window_handle = driver.current_window_handle
 
-def isX5OccurAlot():
-    x5Count = 0
-    x5LastestBoxes = list(boxCollection.find().sort("time",-1).limit(20))
-    for x5Box in x5LastestBoxes:
-        if x5Box["type"] == "x5":
-            x5Count += 1
-        else:
-            return x5Count
-    return x5Count
-isbet = -1
+key500.click()
+time.sleep(0.3)
+box1.click()
+time.sleep(0.5)
 
-# count how many times x5 appear in a row
-while(True):
-    driver.refresh()
-    time.sleep(5)
-    curRound = driver.find_element_by_xpath("//*[@id='container']/div/div[2]/div[2]/div/em").text
-    logRound = list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
-    
-    if(curRound == logRound and curRound != isbet):
-        try:
-            box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
-            box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
-            box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
-            box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
-            box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
-            box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
-            box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
-            box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
+# print(main_window_handle)
+# print(driver.window_handles)
+# popup_window_handle = None
+# while not popup_window_handle:
+#     for handle in driver.window_handles:
+#         if handle != main_window_handle:
+#             popup_window_handle = handle
+#             break
+# print(popup_window_handle)
+# driver.switch_to.window(popup_window_handle)
+# print("in here")
 
-            # x500Key = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
-            # x500Key.click()
-        except:
-            continue
-        chosenBox = []
-        if isX5OccurAlot() >= 15:
-            for i in range (15, isX5OccurAlot()+1):
-                for i in range(4):
-                    chosenBox.append("x10")
-                    chosenBox.append("x15")
-                    chosenBox.append("x25")
-                    chosenBox.append("x45")    
-            print("x5 appear " + str(isX5OccurAlot()) + " times in a row")
+checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
+confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
+# close = driver.find_element_by_xpath("//*[@class='nimo-box-lottery__modal-close']")
 
-        if isX50notAppear() >= 5:
-            for i in range(40):
-                chosenBox.append("x5")
-        if isX50notAppear() == 4:
-            for i in range(20):
-                chosenBox.append("x5")
-        if isX50notAppear() == 3:
-            for i in range(10):
-                chosenBox.append("x5")
+checkbox.click()
+time.sleep(0.2)
+confirm.click()
+driver.switch_to.window(main_window_handle)
 
-        # if isX50notAppear() > 3:
-        #     for i in range(3, isX50notAppear()+1):
-        #         chosenBox.append("x5")
 
-        sortedCollection = list(boxCollection.find({}).sort("time",-1))
-        for type in types:
-            basePercent = round(boxCollection.count_documents({"type": type})/totalCount * 100, 3)
-            curPos = sortedCollection.index(next(i for i in sortedCollection if i["type"]==type)) + 1
-            baseOccur = 100 / basePercent
-            occurDiff = curPos - baseOccur
-            distanceDiffPecent = round(occurDiff/baseOccur * 100, 3)
-            # print("baseOccur: " + str(baseOccur) + " curPos: " + str(curPos) + " occurDiff:" + str(occurDiff) + " occurDiffPecent:" + str(distanceDiffPecent) )
-            # if distanceDiffPecent > breakPoints[type] and len(chosenBox) < 4:
-            #     percentTimes = round(distanceDiffPecent / breakPoints[type])
-            #     print("Percent Times:" + str(percentTimes))
-            #     for i in range(0, percentTimes):
-            #         chosenBox.append(type)
-        # if len(chosenBox) <= 1:
-        #     chosenBox.append("x5")
-        print("Current Round: " + str(curRound))
-        if(len(chosenBox) == 0):
-            continue
-        for box in chosenBox:
-            print(box)
-        for box in chosenBox:
-            if "x5" in box:
-                try:
-                    box1.click()
-                    time.sleep(0.5)
-                    box2.click()
-                    time.sleep(0.5)
-                    box3.click()
-                    time.sleep(0.5)
-                    box4.click()
-                    time.sleep(0.5)
-                    print("Box 1,2,3,4 Clicked")
-                except:
-                    continue
-            if "x10" in box:
-                try:
-                    box5.click()
-                    time.sleep(0.5)
-                    print("Box 5 Clicked")
-                except:
-                    continue
-            if "x15" in box:
-                try:
-                    box6.click()
-                    time.sleep(0.5)
-                    print("Box 6 Clicked")
-                except:
-                    continue
-            if "x25" in box:
-                try:
-                    box7.click()
-                    time.sleep(0.5)
-                    print("Box 7 Clicked")
-                except:
-                    continue
-            if "x45" in box:
-                try:
-                    box8.click()
-                    time.sleep(0.5)
-                    print("Box 8 Clicked")
-                except:
-                    continue
-        isbet = curRound
-        time.sleep(5)
-    else:
-        continue
-    
-    
+
