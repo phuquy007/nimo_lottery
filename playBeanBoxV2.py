@@ -26,7 +26,7 @@ chrome_options.add_argument("--window-size=800x600")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
 url = 'https://www.nimo.tv/mkt/act/super/bean_box_lottery'
 driver.get(url)
-time.sleep(15)
+time.sleep(2)
 
 class Case(Enum):
     x45 = 1
@@ -70,6 +70,24 @@ Row1_3BoxesBreakPoint = Row1_3BoxesDict[0]["turn"]
 
 Row1_1BoxDict = readFile("1 box row 1 bet.csv")
 Row1_1BoxBreakPoint = Row1_1BoxDict[0]["turn"]
+
+def Login():
+    areacode = driver.find_element_by_xpath("//i[contains(@class,'nimo-icon-caret-down')]")
+    phoneNumber = driver.find_element_by_xpath("//input[contains(@class,'phone-number-input')]")
+    password = driver.find_element_by_xpath("//input[@placeholder = 'Enter Password']")
+    loginButton = driver.find_element_by_xpath("//button[contains(@class,'nimo-login-body-button')]")
+    areacode.click()
+    time.sleep(0.1)
+    vietnameAreaCode = driver.find_element_by_xpath("//div[text()='Vietnam']")
+    vietnameAreaCode.click()
+    time.sleep(0.1)
+    phoneNumber.send_keys("363688557")
+    time.sleep(0.1)
+    password.send_keys("4blablablabla")
+    time.sleep(0.1)
+    loginButton.click() 
+
+Login()
 
 # Return the current Round
 def GetCurRound():
@@ -266,14 +284,13 @@ def Bet(round, betBox, betAmount):
             print(f'Betting fail... {error}')
             continue
            
-        
+
         
 # def showPreviousBetResult(curRound):
 #     betResults = list(BetHistory.find({"round": int(curRound) - 1}).sort("time", -1).limit(1))[0]
 #     if(datetime.today().date() == betResults["time"].date()):
 
 #     print()
-
 isbet = -1
 isNotBet = -1
 isDisplayResult = -1
@@ -281,7 +298,7 @@ isFollowing = Case.notFollowing
 isBoxCalculated = False
 testing = False
 while(True):
-
+    
     curRound = int(GetCurRound())
     betRound = int(GetLastestcalculationBox())
 
