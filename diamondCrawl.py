@@ -4,15 +4,18 @@ import time
 import pymongo
 from pymongo import MongoClient
 from datetime import datetime
+from diamondAnalystBox import pushCalculation
+from betResult import CalculateBetResult
 
 chrome_options = Options()
 
-chrome_options.add_argument("--window-size=10x10")  
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="chromedriver.exe")
+chrome_options.add_argument("--window-size=800x600")  
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
 
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
+calculationCollection = db["DiamondAnalyst"]
 boxCollection = db["DiamondBoxes"]
 
 url = 'https://www.nimo.tv/mkt/act/super/box_lottery'
@@ -53,7 +56,16 @@ while(True):
         newBox = {"round": round, "box": prizebox, "time": datetime.now()}
         pushToMongo(newBox)
         print("Round: " + round +" - box: " + str(prizebox))
-       
-        time.sleep(5)
-    
+        
+        lastLogBox = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
+        if(calculationCollection.count_documents({}) > 0):
+            calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+            if calculatedBox["round"] != lastLogBox["round"]:
+                pushCalculation(lastLogBox["round"])
+                isBoxCalculated = True
+        else:
+            pushCalculation(lastLogBox["round"])
+            isBoxCalculated = True
+            
 
+        time.sleep(5)

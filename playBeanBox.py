@@ -18,51 +18,44 @@ chrome_options.add_argument("--window-size=10x10")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
 url = 'https://www.nimo.tv/mkt/act/super/bean_box_lottery'
 driver.get(url)
-time.sleep(15)
+time.sleep(2)
 
 # try:
 box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
-box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
-box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
-box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
-box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
-box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
-box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
-box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
-key50 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[1]")
-key500 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
-key1k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[3]")
-key5k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[4]")
+# main_window_handle = None
+# while not main_window_handle:
+#     main_window_handle = driver.current_window_handle
 
-main_window_handle = None
-while not main_window_handle:
-    main_window_handle = driver.current_window_handle
-
-key500.click()
-time.sleep(0.3)
 box1.click()
-time.sleep(0.5)
+time.sleep(1)
 
 # print(main_window_handle)
 # print(driver.window_handles)
-# popup_window_handle = None
-# while not popup_window_handle:
+# login_window_handle = None
+# while not login_window_handle:
 #     for handle in driver.window_handles:
 #         if handle != main_window_handle:
-#             popup_window_handle = handle
+#             login_window_handle = handle
 #             break
-# print(popup_window_handle)
-# driver.switch_to.window(popup_window_handle)
+# print(login_window_handle)
+# driver.switch_to.window(login_window_handle)
 # print("in here")
 
-checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
-confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
+# checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
+# confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
 
-checkbox.click()
-time.sleep(0.2)
-confirm.click()
-driver.switch_to.window(main_window_handle)
-
-
-
+areacode = driver.find_element_by_xpath("//i[contains(@class,'nimo-icon-caret-down')]")
+phoneNumber = driver.find_element_by_xpath("//input[contains(@class,'phone-number-input')]")
+password = driver.find_element_by_xpath("//input[@placeholder = 'Enter Password']")
+loginButton = driver.find_element_by_xpath("//button[contains(@class,'nimo-login-body-button')]")
+areacode.click()
+time.sleep(0.1)
+vietnameAreaCode = driver.find_element_by_xpath("//div[text()='Vietnam']")
+vietnameAreaCode.click()
+time.sleep(0.1)
+phoneNumber.send_keys("363688557")
+time.sleep(0.1)
+password.send_keys("4blablablabla")
+time.sleep(0.1)
+loginButton.click()

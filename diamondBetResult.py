@@ -13,10 +13,10 @@ from enum import Enum
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
-calculationCollection = db["BeanAnalyst"]
-boxCollection = db["BeanBoxesv2"]
-Emulator = db["GameEmulation"]
-BetHistory = db["BetHistory"]
+calculationCollection = db["DiamondAnalyst"]
+boxCollection = db["DiamondBoxes"]
+Emulator = db["DiamondGameEmulation"]
+BetHistory = db["DiamondBetHistory"]
 
 # def CalculateBetResult(round):
 #     try:
@@ -125,7 +125,7 @@ def CalculateBetResult(round):
             print("")
     except Exception as error:
         # print(error)
-        print(f'Error: Cannot get data from bethistory and logBox')
+        print(f'Error: Cannot get data from BetHistory and LogBox')
         print("")
         print("----------------------------------------------------------------")
         print("")
