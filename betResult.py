@@ -116,8 +116,8 @@ def CalculateBetResult(round):
                 print("")
 
             Emulator.update_one({"id": myDiamondID}, {"$set":{"diamond": myDiamond}})
-            document = {"round": myBet["round"], "bets": myBet["bets"], "result": win, "my diamond": myDiamond, "time": datetime.now()}
-            Emulator.insert_one(document)
+            # document = {"round": myBet["round"], "bets": myBet["bets"], "result": win, "my diamond": myDiamond, "time": datetime.now()}
+            # Emulator.insert_one(document)
         else:
             print(f'Round {round} is not bet')
             print("")
@@ -125,7 +125,7 @@ def CalculateBetResult(round):
             print("")
     except Exception as error:
         # print(error)
-        print(f'Error: Cannot get data from bethistory and logBox')
+        print(f'Round {round} is not bet')
         print("")
         print("----------------------------------------------------------------")
         print("")

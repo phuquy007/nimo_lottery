@@ -63,9 +63,11 @@ while(True):
             if calculatedBox["round"] != lastLogBox["round"]:
                 pushCalculation(lastLogBox["round"])
                 isBoxCalculated = True
+                driver.refresh()
         else:
             pushCalculation(lastLogBox["round"])
             isBoxCalculated = True
+            driver.refresh()
             
 
         time.sleep(2)

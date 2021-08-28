@@ -72,6 +72,10 @@ Row1_1BoxDict = readFile("1 box row 1 bet.csv")
 Row1_1BoxBreakPoint = Row1_1BoxDict[0]["turn"]
 
 def Login():
+    closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
+    closeDown.click()
+    time.sleep(0.5)
+    driver.execute_script("window.scrollTo(0, 450)") 
     box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
     box1.click()
     time.sleep(1)
@@ -89,6 +93,12 @@ def Login():
     password.send_keys("4blablablabla")
     time.sleep(0.1)
     loginButton.click() 
+    time.sleep(2.5)
+    
+    closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
+    closeDown.click()
+    time.sleep(0.5)
+    driver.execute_script("window.scrollTo(0, 420)") 
 
 Login()
 
@@ -125,38 +135,48 @@ def boxClick(betBox):
         box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
         box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
+        while not box1 or not box2 or not box3 or not box4 or not box5 or not box6 or not box7 or not box8:
+            box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+            box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
+            box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
+            box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
+            box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
+            box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
+            box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
+            box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
+
         if betBox == "box1":
             box1.click()
             print("Box 1 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box2":
             box2.click()
             print("Box 2 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box3":
             box3.click()
             print("Box 3 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box4":
             box4.click()
             print("Box 4 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box5":
             box5.click()
             print("Box 5 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box6":
             box6.click()
             print("Box 6 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box7":
             box7.click()
             print("Box 7 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
         if betBox == "box8":
             box8.click()
             print("Box 8 is clicked")
-            time.sleep(0.2)
+            time.sleep(0.5)
     except:
         print(f'Cannot click {betBox}')
 
