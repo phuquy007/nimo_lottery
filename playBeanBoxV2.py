@@ -72,6 +72,9 @@ Row1_1BoxDict = readFile("1 box row 1 bet.csv")
 Row1_1BoxBreakPoint = Row1_1BoxDict[0]["turn"]
 
 def Login():
+    box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+    box1.click()
+    time.sleep(1)
     areacode = driver.find_element_by_xpath("//i[contains(@class,'nimo-icon-caret-down')]")
     phoneNumber = driver.find_element_by_xpath("//input[contains(@class,'phone-number-input')]")
     password = driver.find_element_by_xpath("//input[@placeholder = 'Enter Password']")

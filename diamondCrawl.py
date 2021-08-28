@@ -68,4 +68,4 @@ while(True):
             isBoxCalculated = True
             
 
-        time.sleep(5)
+        time.sleep(2)
