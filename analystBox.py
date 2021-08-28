@@ -28,8 +28,14 @@ def GetCurBoxPercentage(lastest100, input):
 
 # Return the number of times a box not appear
 def BoxNotAppear(inputBox):
-    lastestBoxAppear = list(boxCollection.find({"box": inputBox}).sort("time", -1).limit(1))
-    return int(GetLastestLogRound()) - int(lastestBoxAppear[0]["round"]) - 1
+    lastestBoxAppear = int(list(boxCollection.find({"box": inputBox}).sort("time", -1).limit(1))[0]["round"])
+    lastLogRound = int(GetLastestLogRound())
+    result = 0
+    if (lastLogRound < lastestBoxAppear):
+        result = (lastLogRound - 1) + (2160 - lastestBoxAppear)
+    else:
+        result = lastLogRound - lastestBoxAppear
+    return result
 
 def BoxX50NotAppearFor(lastest100):
     counter = 0

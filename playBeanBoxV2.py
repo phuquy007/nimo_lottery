@@ -3,7 +3,7 @@ import pymongo
 from pymongo import MongoClient
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from datetime import datetime
+from datetime import date, datetime
 import time
 from readFile import readFile
 from enum import Enum
@@ -106,35 +106,44 @@ def boxClick(betBox):
 
         if betBox == "box1":
             box1.click()
+            print("Box 1 is clicked")
             time.sleep(0.2)
         if betBox == "box2":
             box2.click()
+            print("Box 2 is clicked")
             time.sleep(0.2)
         if betBox == "box3":
             box3.click()
+            print("Box 3 is clicked")
             time.sleep(0.2)
         if betBox == "box4":
             box4.click()
+            print("Box 4 is clicked")
             time.sleep(0.2)
         if betBox == "box5":
             box5.click()
+            print("Box 5 is clicked")
             time.sleep(0.2)
         if betBox == "box6":
             box6.click()
+            print("Box 6 is clicked")
             time.sleep(0.2)
         if betBox == "box7":
             box7.click()
+            print("Box 7 is clicked")
             time.sleep(0.2)
         if betBox == "box8":
             box8.click()
+            print("Box 9 is clicked")
             time.sleep(0.2)
     except:
         print(f'Cannot click {betBox}')
 
-first5k = True
-first1k = True
-first500 = True
+
+firstBox = [True, True, True, True]
 def Bet(round, betBox, betAmount):
+    
+    # print(f'Round {round} {betBox} betting...')
     isDone = False
     while not isDone:
         curID = -1
@@ -144,7 +153,7 @@ def Bet(round, betBox, betAmount):
                 if bet["time"].date() == datetime.today().date():
                     curID = bet["_id"]
         except:
-            print(f'Round : {round} - Cannot Bet')
+            print()
         if curID != -1:
             updatingBet = BetHistory.find_one({"_id": curID})
             newBets = updatingBet["bets"]
@@ -164,10 +173,10 @@ def Bet(round, betBox, betAmount):
             if keys["key5k"] > 0:
                 key5k.click()
                 time.sleep(0.2)
-                if first5k:
+                if firstBox[3]:
                     boxClick(betBox)
                     time.sleep(0.5)
-                    while first5k:
+                    while firstBox[3]:
                         try:
                             checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
                             confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
@@ -175,7 +184,7 @@ def Bet(round, betBox, betAmount):
                             time.sleep(0.2)
                             confirm.click()
                             time.sleep(0.2)
-                            first5k = False
+                            firstBox[3] = False
                         except:
                             continue
                     for i in range (0, keys["key5k"] - 1):
@@ -187,10 +196,10 @@ def Bet(round, betBox, betAmount):
             if keys["key1k"] > 0:
                 key1k.click()
                 time.sleep(0.2)
-                if first1k:
+                if firstBox[2]:
                     boxClick(betBox)
                     time.sleep(0.5)
-                    while first1k:
+                    while firstBox[2]:
                         try:
                             checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
                             confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
@@ -198,7 +207,7 @@ def Bet(round, betBox, betAmount):
                             time.sleep(0.2)
                             confirm.click()
                             time.sleep(0.2)
-                            first1k = False
+                            firstBox[2] = False
                         except:
                             continue
                     for i in range (0, keys["key1k"]-1):
@@ -210,10 +219,10 @@ def Bet(round, betBox, betAmount):
             if keys["key500"] > 0:
                 key500.click()
                 time.sleep(0.2)
-                if first500:
+                if firstBox[1]:
                     boxClick(betBox)
                     time.sleep(0.5)
-                    while first500:
+                    while firstBox[1]:
                         try:
                             checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
                             confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
@@ -221,7 +230,7 @@ def Bet(round, betBox, betAmount):
                             time.sleep(0.2)
                             confirm.click()
                             time.sleep(0.2)
-                            first500 = False
+                            firstBox[1] = False
                         except:
                             continue
                     for i in range (0, keys["key500"]-1):
@@ -232,35 +241,56 @@ def Bet(round, betBox, betAmount):
             if keys["key50"] > 0:
                 key50.click()
                 time.sleep(0.2)
-                for i in range (0, keys["key50"]):
+                if firstBox[0]:
                     boxClick(betBox)
+                    time.sleep(0.5)
+                    while firstBox[0]:
+                        try:
+                            checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
+                            confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
+                            checkbox.click()
+                            time.sleep(0.2)
+                            confirm.click()
+                            time.sleep(0.2)
+                            firstBox[0] = False
+                        except:
+                            continue
+                    for i in range (0, keys["key50"]-1):
+                        boxClick(betBox)
+                else:
+                    for i in range (0, keys["key50"]):
+                        boxClick(betBox)
             isDone = True
-        except:
+            print(f'Round {round} Bet {betBox} Amount {betAmount}')
+        except Exception as error:
+            print(f'Betting fail... {error}')
             continue
+           
         
         
+# def showPreviousBetResult(curRound):
+#     betResults = list(BetHistory.find({"round": int(curRound) - 1}).sort("time", -1).limit(1))[0]
+#     if(datetime.today().date() == betResults["time"].date()):
 
+#     print()
 
 isbet = -1
 isNotBet = -1
+isDisplayResult = -1
 isFollowing = Case.notFollowing
 isBoxCalculated = False
+testing = False
 while(True):
-    # driver.refresh()
-    # time.sleep(5)
 
-    # calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
-    # lastLogBox = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
-    # if calculatedBox["round"] != lastLogBox["round"]:
-    #     pushCalculation(lastLogBox["round"])
-    #     isBoxCalculated = True
-    #     time.sleep(1)
-    
     curRound = int(GetCurRound())
     betRound = int(GetLastestcalculationBox())
+
+    if(isDisplayResult != curRound):
+        CalculateBetResult(curRound)
+        isDisplayResult = curRound
     
-    if(betRound != isbet and (curRound == betRound+1 or curRound == 1)):
-            
+    if(curRound != isbet and (curRound == betRound + 1 or curRound == 1 and betRound == 2160)):
+        
         chosenBox = []
         # Add box to play
         # print("Current Round: " + str(curRound))
@@ -286,6 +316,7 @@ while(True):
         Box4Appear = int(lastestBox["boxes"]["box4"]["appearFor"]) + 1
 
         if x45Turn >= int(x45BreakPoint):
+            print("Box 8 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.x45:
                 isFollowing = Case.x45
                 betAmount = -1
@@ -293,9 +324,10 @@ while(True):
                     if int(item["turn"]) == int(x45Turn):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box8", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box8", betAmount)
+                    # CalculateBetResult(betRound)
         elif x25Turn >= int(x25BreakPoint):
+            print("Box 7 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.x25:
                 isFollowing = Case.x25
                 betAmount = -1
@@ -303,10 +335,11 @@ while(True):
                     if int(item["turn"]) == int(x25Turn):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box7", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box7", betAmount)
+                    # CalculateBetResult(betRound)
         # this case is different from other cases
         elif row2Turn >= int(row2BreakPoint):
+            print("Row 2 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.row2:
                 isFollowing = Case.row2
                 box5Amount = -1
@@ -320,12 +353,13 @@ while(True):
                         box7Amount = int(item["box7"])
                         box8Amount = int(item["box8"])
                 if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
-                    Bet(betRound, "box5", box5Amount)
-                    Bet(betRound, "box6", box6Amount)
-                    Bet(betRound, "box7", box7Amount)
-                    Bet(betRound, "box8", box8Amount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box5", box5Amount)
+                    Bet(curRound, "box6", box6Amount)
+                    Bet(curRound, "box7", box7Amount)
+                    Bet(curRound, "box8", box8Amount)
+                    # CalculateBetResult(betRound)
         elif x15Turn >= int(x15BreakPoint):
+            print("Box 6 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.x15:
                 isFollowing = Case.x15
                 betAmount = -1
@@ -333,9 +367,10 @@ while(True):
                     if int(item["turn"]) == int(x15Turn):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box6", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box6", betAmount)
+                    # CalculateBetResult(betRound)
         elif x10Turn >= int(x10BreakPoint):
+            print("Box 5 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.x10:
                 isFollowing = Case.x10
                 betAmount = -1
@@ -343,9 +378,10 @@ while(True):
                     if int(item["turn"]) == int(x10Turn):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box5", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box5", betAmount)
+                    # CalculateBetResult(betRound)
         elif row1AllTurn >= int(row1BreakPoint):
+            print("Row 1 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.row1All:
                 isFollowing = Case.row1All
                 betAmount = -1
@@ -353,12 +389,13 @@ while(True):
                     if int(item["turn"]) == int(row1AllTurn):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box1", betAmount)
-                    Bet(betRound, "box2", betAmount)
-                    Bet(betRound, "box3", betAmount)
-                    Bet(betRound, "box4", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box1", betAmount)
+                    Bet(curRound, "box2", betAmount)
+                    Bet(curRound, "box3", betAmount)
+                    Bet(curRound, "box4", betAmount)
+                    # CalculateBetResult(betRound)
         elif box1NotAppear >= int(Row1_1BoxBreakPoint):
+            print("Box 1 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.box1:
                 isFollowing = Case.box1
                 betAmount = -1
@@ -366,9 +403,10 @@ while(True):
                     if int(item["turn"]) == int(box1NotAppear):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box1", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box1", betAmount)
+                    # CalculateBetResult(betRound)
         elif box2NotAppear >= int(Row1_1BoxBreakPoint):
+            print("Box 2 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.box2:
                 isFollowing = Case.box2
                 betAmount = -1
@@ -376,9 +414,10 @@ while(True):
                     if int(item["turn"]) == int(box2NotAppear):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box2", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box2", betAmount)
+                    # CalculateBetResult(betRound)
         elif box3NotAppear >= int(Row1_1BoxBreakPoint):
+            print("Box 3 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.box3:
                 isFollowing = Case.box3
                 betAmount = -1
@@ -386,9 +425,11 @@ while(True):
                     if int(item["turn"]) == int(box3NotAppear):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box3", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box3", betAmount)
+                    # CalculateBetResult(betRound)
+            
         elif box4NotAppear >= int(Row1_1BoxBreakPoint):
+            print("Box 4 pre-betting")
             if isFollowing == Case.notFollowing or isFollowing == Case.box4:
                 isFollowing = Case.box4
                 betAmount = -1
@@ -396,18 +437,30 @@ while(True):
                     if int(item["turn"]) == int(box4NotAppear):
                         betAmount = int(item["bet"])
                 if betAmount != -1:
-                    Bet(betRound, "box4", betAmount)
-            CalculateBetResult(betRound)
+                    Bet(curRound, "box4", betAmount)
+                    
+                    # CalculateBetResult(betRound)
+        elif testing:
+            print("Testing pre-betting")
+            if isFollowing == Case.notFollowing:
+                betAmount = -1
+                # for item in Row1_1BoxDict:
+                #     if int(item["turn"]) == int(box4NotAppear):
+                #         betAmount = int(item["bet"])
+                betAmount = 50
+                if betAmount != -1:
+                    Bet(curRound, "box3", betAmount)
+            testing = False
         else:
             isFollowing = Case.notFollowing
-
+        isNotBet = curRound
         isbet = curRound
-        
+
         # time.sleep(5)
-    elif isNotBet <= curRound - 2:
-        print(f'Round {curRound-1} not bet')
-        isNotBet = curRound - 1
-        continue
+    # elif isNotBet <= curRound - 2:
+    #     isNotBet = curRound - 1
+    #     print(f'Round {curRound-1} not bet')
+    #     continue
     else:
         continue
     
