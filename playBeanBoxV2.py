@@ -26,7 +26,7 @@ chrome_options.add_argument("--window-size=800x600")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="C:\chromedriver\chromedriver.exe")
 url = 'https://www.nimo.tv/mkt/act/super/bean_box_lottery'
 driver.get(url)
-time.sleep(15)
+time.sleep(2)
 
 class Case(Enum):
     x45 = 1
@@ -134,7 +134,7 @@ def boxClick(betBox):
             time.sleep(0.2)
         if betBox == "box8":
             box8.click()
-            print("Box 9 is clicked")
+            print("Box 8 is clicked")
             time.sleep(0.2)
     except:
         print(f'Cannot click {betBox}')
