@@ -5,6 +5,7 @@ from datetime import datetime
 from betResult import CalculateBetResult
 from readFile import readFile
 from enum import Enum
+from helper import WriteLog
 
 CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/NimoLottery?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING)

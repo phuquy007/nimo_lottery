@@ -1,3 +1,4 @@
+from helper import WriteLog
 # def calculateKeys(betAmt):
 #     key5k = betAmt // 5000
 #     betAmt = betAmt % 5000
@@ -16,10 +17,16 @@
 # if result["key5k"] > 0:
 #     print("> 0 ")
 
+from datetime import datetime
+
+
 def changeText(input):
     input[0] = False
 
+try:
+    avb = "You:216540"
+    result = avb / 3
+except Exception as error:
+    # print(error)
+    WriteLog(error, "test")
 
-abc = [True, False]
-changeText(abc)
-print(abc)

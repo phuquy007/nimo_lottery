@@ -10,7 +10,7 @@ CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["BeanAnalyst"]
-boxCollection = db["BeanBoxesv2"]
+boxCollection = db["DiamondBoxes"]
 BetHistory = db["BetHistory"]
 Emulator = db["GameEmulation"]
 
@@ -80,13 +80,14 @@ def minBox(inputBox):
             count += 1
             if count > result:
                 result = count
-                print("Min : " + str(result) + " - Round: " + box["round"])
+                # print("Min : " + str(result) + " - Round: " + box["round"])
         else:
-            if count > 20:
+            if count > 63:
                 times += 1
             count = 0
     print(times)
     return result
+print(minBox("box5"))
 
 def maxBox(inputBox):
     allBoxes = boxCollection.find({}).sort("time", -1)
@@ -116,7 +117,7 @@ def max1stRow():
             if count > result:
                 result = count
         else:
-            if count > 15:
+            if count > 13:
                 time += 1
             count = 0
     print(time)
@@ -141,13 +142,17 @@ def max2ndRow():
     print(time)
     return result
 
+
+# print(minBox("box2"))
+# print(minBox("box3"))
+# print(minBox("box4"))
 # print(max1stRow())
 # print(minBox("box2"))
 
-round = 302
-myBet = list(BetHistory.find({"round": int(round-1)}).sort("time", -1).limit(1))[0]
-result = list(boxCollection.find({"round": str(round)}).sort("time", -1).limit(1))[0]
-print(myBet)
-print(result)
-if(myBet["time"].date() == result["time"].date()):
-    print("Equal")
+# round = 302
+# myBet = list(BetHistory.find({"round": int(round-1)}).sort("time", -1).limit(1))[0]
+# result = list(boxCollection.find({"round": str(round)}).sort("time", -1).limit(1))[0]
+# print(myBet)
+# print(result)
+# if(myBet["time"].date() == result["time"].date()):
+#     print("Equal")

@@ -21,7 +21,7 @@ driver.get(url)
 time.sleep(2)
 
 # try:
-box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+# box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
 
 # main_window_handle = None
 # while not main_window_handle:
@@ -60,7 +60,44 @@ box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]"
 # time.sleep(0.1)
 # loginButton.click()
 
-closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
-closeDown.click()
-time.sleep(0.5)
-driver.execute_script("window.scrollTo(0, 450)") 
+# closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
+# closeDown.click()
+# time.sleep(0.5)
+# driver.execute_script("window.scrollTo(0, 450)") 
+
+def Login():
+    closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
+    closeDown.click()
+    time.sleep(0.5)
+    driver.execute_script("window.scrollTo(0, 450)") 
+    box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+    box1.click()
+    time.sleep(1)
+    areacode = driver.find_element_by_xpath("//i[contains(@class,'nimo-icon-caret-down')]")
+    phoneNumber = driver.find_element_by_xpath("//input[contains(@class,'phone-number-input')]")
+    password = driver.find_element_by_xpath("//input[@placeholder = 'Enter Password']")
+    loginButton = driver.find_element_by_xpath("//button[contains(@class,'nimo-login-body-button')]")
+    areacode.click()
+    time.sleep(0.1)
+    vietnameAreaCode = driver.find_element_by_xpath("//div[text()='Vietnam']")
+    vietnameAreaCode.click()
+    time.sleep(0.1)
+    phoneNumber.send_keys("363688557")
+    time.sleep(0.1)
+    password.send_keys("4blablablabla")
+    time.sleep(0.1)
+    loginButton.click() 
+    time.sleep(2.5)
+    
+    closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
+    closeDown.click()
+    time.sleep(0.5)
+    driver.execute_script("window.scrollTo(0, 420)") 
+
+Login()
+
+time.sleep(1)
+
+box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div/div/div[2]")
+print(box1.text)
+

@@ -79,7 +79,7 @@ def CalculateBetResult(round):
         result = list(boxCollection.find({"round": str(round)}).sort("time", -1))[0]
 
         if(myBet["time"].date() == result["time"].date() == datetime.today().date()):
-            print("Checking Win")
+            # print("Checking Win")
             win = "not win"
             winBet = 0
             totalBetDiamond = 0
@@ -90,32 +90,32 @@ def CalculateBetResult(round):
                 totalBetDiamond += betAmt
 
             if win != "not win":
-                if win == "box1" or win == "box2" or win == "box3" or win == "box4":
-                    winBet = winBet * 5
-                elif win == "box5":
-                    winBet = winBet * 10
-                elif win == "box6":
-                    winBet = winBet * 15
-                elif win == "box7":
-                    winBet = winBet * 25
-                elif win == "box8":
-                    winBet = winBet * 45
-                myDiamond = myDiamond + int(winBet)
+                # if win == "box1" or win == "box2" or win == "box3" or win == "box4":
+                #     winBet = winBet * 5
+                # elif win == "box5":
+                #     winBet = winBet * 10
+                # elif win == "box6":
+                #     winBet = winBet * 15
+                # elif win == "box7":
+                #     winBet = winBet * 25
+                # elif win == "box8":
+                #     winBet = winBet * 45
+                # myDiamond = myDiamond + int(winBet)
 
                 print(f'Round: {round} Winning Box: {result["box"]} - selected Box: {myBet["bets"]} ---> Win')
-                print(f'Diamond: {myDiamond}')
+                # print(f'Diamond: {myDiamond}')
                 print("")
                 print("----------------------------------------------------------------")
                 print("")
             else:
                 myDiamond = myDiamond - int(totalBetDiamond)
                 print(f'Round: {round} Winning Box: {result["box"]} - selected Box: {myBet["bets"]} ---> Lose')
-                print(f'Diamond: {myDiamond}')
+                # print(f'Diamond: {myDiamond}')
                 print("")
                 print("----------------------------------------------------------------")
                 print("")
 
-            Emulator.update_one({"id": myDiamondID}, {"$set":{"diamond": myDiamond}})
+            # Emulator.update_one({"id": myDiamondID}, {"$set":{"diamond": myDiamond}})
             # document = {"round": myBet["round"], "bets": myBet["bets"], "result": win, "my diamond": myDiamond, "time": datetime.now()}
             # Emulator.insert_one(document)
         else:
