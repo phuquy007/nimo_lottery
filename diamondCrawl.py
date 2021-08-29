@@ -68,6 +68,4 @@ while(True):
             pushCalculation(lastLogBox["round"])
             isBoxCalculated = True
             driver.refresh()
-            
-
-        time.sleep(2)
+        time.sleep(3)

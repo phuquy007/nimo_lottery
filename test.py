@@ -10,7 +10,7 @@ CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["BeanAnalyst"]
-boxCollection = db["DiamondBoxes"]
+boxCollection = db["BeanBoxesv2"]
 BetHistory = db["BetHistory"]
 Emulator = db["GameEmulation"]
 
@@ -80,14 +80,45 @@ def minBox(inputBox):
             count += 1
             if count > result:
                 result = count
-                # print("Min : " + str(result) + " - Round: " + box["round"])
+                print("Min : " + str(result) + " - Round: " + box["round"] + " - Time:" + str(box["time"].date()))
         else:
             if count > 63:
                 times += 1
             count = 0
     print(times)
     return result
-print(minBox("box5"))
+
+def minBox2(inputBox):
+    allBoxes = list(boxCollection.find({}).sort("time", 1))
+    result = 0
+    count = 0
+    times = 0
+    for i in range (0, len(allBoxes)):
+        if i > 0:
+            if allBoxes[i]["box"] != inputBox and (int(allBoxes[i]["round"]) == int(allBoxes[i-1]["round"]) + 1 or (int(allBoxes[i]["round"]) == 1 and int(allBoxes[i-1]["round"]==2160))):
+                count += 1
+                if count > result:
+                    result = count
+                    print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
+            else:
+                if count > 63:
+                    times += 1
+                count = 0
+    print(times)
+    return result
+# print(minBox2("box7"))
+def printTest():
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0
+    times = 0
+    for box in allBoxes:
+        if int(box["round"]) > 1662 and int(box["round"]) < 1895 and box["time"].date() == datetime(2021,8,28).date():
+            print(f'Round {box["round"]} - {box["box"]} Time {str(box["time"].date())}')
+    return result
+
+printTest()
+
 
 def maxBox(inputBox):
     allBoxes = boxCollection.find({}).sort("time", -1)

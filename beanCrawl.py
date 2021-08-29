@@ -57,11 +57,15 @@ while(True):
         pushToMongo(newBox)
         print("Round: " + round +" - box: " + str(prizebox))
         
-        calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
         lastLogBox = list(boxCollection.find({}).sort("time", -1).limit(1))[0]
-        if calculatedBox["round"] != lastLogBox["round"]:
+        if(calculationCollection.count_documents({}) > 0):
+            calculatedBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
+            if calculatedBox["round"] != lastLogBox["round"]:
+                pushCalculation(lastLogBox["round"])
+                isBoxCalculated = True
+                driver.refresh()
+        else:
             pushCalculation(lastLogBox["round"])
             isBoxCalculated = True
-            
-
-        time.sleep(5)
+            driver.refresh()
+        time.sleep(3)

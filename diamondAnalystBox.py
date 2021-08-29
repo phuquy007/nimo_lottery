@@ -91,15 +91,17 @@ def BoxAppearInRow(lastest100, inputBox):
     return counter
 
 def minBox(allBoxes, inputBox):
+    allBoxes = list(boxCollection.find({}).sort("time", 1))
     result = 0
     count = 0
-    for box in allBoxes:
-        if box["box"] != inputBox:
-            count += 1
-            if count > result:
-                result = count
-        else:
-            count = 0
+    for i in range (0, len(allBoxes)):
+        if i > 0:
+            if allBoxes[i]["box"] != inputBox and (int(allBoxes[i]["round"]) == int(allBoxes[i-1]["round"]) + 1 or (int(allBoxes[i]["round"]) == 1 and int(allBoxes[i-1]["round"]==2160))):
+                count += 1
+                if count > result:
+                    result = count
+            else:
+                count = 0
     return result
 
 def maxBox(allBoxes, inputBox):
