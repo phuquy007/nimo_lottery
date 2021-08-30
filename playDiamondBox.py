@@ -130,10 +130,10 @@ def calculateKeys(betAmt):
     betAmt = betAmt % 5000
     key1k = betAmt // 1000
     betAmt = betAmt % 1000
-    key500 = betAmt // 500
-    betAmt = betAmt % 500
+    key100 = betAmt // 100
+    betAmt = betAmt % 100
     key50 = betAmt // 50
-    return {"key5k": key5k, "key1k": key1k, "key500": key500, "key50": key50}
+    return {"key5k": key5k, "key1k": key1k, "key100": key100, "key50": key50}
 
 def boxClick(betBox):
     try:
@@ -159,35 +159,35 @@ def boxClick(betBox):
         if betBox == "box1":
             box1.click()
             print("Box 1 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box2":
             box2.click()
             print("Box 2 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box3":
             box3.click()
             print("Box 3 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box4":
             box4.click()
             print("Box 4 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box5":
             box5.click()
             print("Box 5 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box6":
             box6.click()
             print("Box 6 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box7":
             box7.click()
             print("Box 7 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
         if betBox == "box8":
             box8.click()
             print("Box 8 is clicked")
-            time.sleep(0.5)
+            time.sleep(1)
     except Exception as error:
         WriteLog(error, "BoxClick Function")
         
@@ -246,7 +246,7 @@ def Bet(round, betBox, betAmount):
 
         try:
             key50 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[1]")
-            key500 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
+            key100 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
             key1k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[3]")
             key5k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[4]")
 
@@ -254,16 +254,14 @@ def Bet(round, betBox, betAmount):
                 key5k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[4]")
                 # print(firstBox[3])
                 key5k.click()
-                time.sleep(0.5)
+                time.sleep(0.2)
                 if firstBox[3]:
                     boxClick(betBox)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     while firstBox[3]:
                         try:
-                            # checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
-                            # confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
-                            confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
+                            checkbox = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[4]/span")
+                            confirm = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]")
                             checkbox.click()
                             time.sleep(0.5)
                             confirm.click()
@@ -281,14 +279,14 @@ def Bet(round, betBox, betAmount):
                 key1k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[3]")
                 # print(firstBox[2])
                 key1k.click()
-                time.sleep(0.5)
+                time.sleep(0.2)
                 if firstBox[2]:
                     boxClick(betBox)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     while firstBox[2]:
                         try:
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
-                            confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
+                            checkbox = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[4]/span")
+                            confirm = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]")
                             checkbox.click()
                             time.sleep(0.5)
                             confirm.click()
@@ -302,18 +300,18 @@ def Bet(round, betBox, betAmount):
                 else:
                     for i in range (0, keys["key1k"]):
                         boxClick(betBox)
-            if keys["key500"] > 0:
-                key500 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
+            if keys["key100"] > 0:
+                key100 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
                 # print(firstBox[1])
-                key500.click()
-                time.sleep(0.5)
+                key100.click()
+                time.sleep(0.2)
                 if firstBox[1]:
                     boxClick(betBox)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     while firstBox[1]:
                         try:
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
-                            confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
+                            checkbox = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[4]/span")
+                            confirm = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]")
                             checkbox.click()
                             time.sleep(0.5)
                             confirm.click()
@@ -321,23 +319,23 @@ def Bet(round, betBox, betAmount):
                             firstBox[1] = False
                         except:
                             break
-                    for i in range (0, keys["key500"]-1):
+                    for i in range (0, keys["key100"]-1):
                         boxClick(betBox)
                 else:
-                    for i in range(0, keys["key500"]):
+                    for i in range(0, keys["key100"]):
                         boxClick(betBox)
             if keys["key50"] > 0:
                 key50 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[1]")
                 # print(firstBox[0])
                 key50.click()
-                time.sleep(0.5)
+                time.sleep(0.2)
                 if firstBox[0]:
                     boxClick(betBox)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     while firstBox[0]:
                         try:
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
-                            confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
+                            checkbox = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[4]/span")
+                            confirm = driver.find_element_by_xpath("//*[@id='container']/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]")
                             checkbox.click()
                             time.sleep(0.5)
                             confirm.click()
@@ -350,6 +348,7 @@ def Bet(round, betBox, betAmount):
                 else:
                     for i in range (0, keys["key50"]):
                         boxClick(betBox)
+            CheckUnBet(round, betBox, betAmount)
             isDone = True
             print(f'Round {round} Bet {betBox} Amount {betAmount}')
         except Exception as error:

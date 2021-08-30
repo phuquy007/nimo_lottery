@@ -11,7 +11,7 @@ client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["DiamondAnalyst"]
 # boxCollection = db["DiamondBoxes"]
-boxCollection = db["BeanBoxesv2"]
+boxCollection = db["DiamondBoxes"]
 BetHistory = db["DiamondBetHistory"]
 Emulator = db["DiamondGameEmulation"]
 
@@ -25,6 +25,18 @@ def getBetAmount(betCase, betTurn):
         if int(item["turn"]) == int(betTurn):
             return item["bet"]
     return -1
+
+
+# def BoxNotAppear(inputBox):
+#     lastestBoxAppear = int(list(boxCollection.find({"box": inputBox}).sort("time", -1).limit(1))[0]["round"])
+#     lastLogRound = int(GetLastestLogRound())
+#     result = 0
+#     if (lastLogRound < lastestBoxAppear):
+#         result = (lastLogRound - 1) + (2160 - lastestBoxAppear)
+#     else:
+#         result = lastLogRound - lastestBoxAppear
+#     return result
+
 
 # print(getBetAmount("", 153))
 
@@ -100,12 +112,12 @@ def minBox2(inputBox):
                 count += 1
                 if count > result:
                     result = count
-                    # print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
+                    print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
             else:
-                if count > 115:
+                if count > 250:
                     times += 1
                 count = 0
-    # print(times)
+    print(times)
     return result
 # print(f'Min Box 1: {minBox2("box1")}')
 # print(f'Min Box 2: {minBox2("box2")}')
@@ -114,7 +126,7 @@ def minBox2(inputBox):
 # print(f'Min Box 5: {minBox2("box5")}')
 # print(f'Min Box 6: {minBox2("box6")}')
 # print(f'Min Box 7: {minBox2("box7")}')
-# print(f'Min Box 8: {minBox2("box8")}')
+print(f'Min Box 8: {minBox2("box8")}')
 
 def printTest():
     allBoxes = boxCollection.find({}).sort("time", 1)
@@ -122,7 +134,7 @@ def printTest():
     count = 0
     times = 0
     for box in allBoxes:
-        if int(box["round"]) > 1543 and int(box["round"]) < 1803 and box["time"].date() == datetime(2021,8,29).date():
+        if int(box["round"]) > 246 and int(box["round"]) < 526 and box["time"].date() == datetime(2021,8,30).date():
             print(f'Round {box["round"]} - {box["box"]} Time {str(box["time"].date())}')
     return result
 
@@ -163,7 +175,7 @@ def max1stRow():
     print(time)
     return result
 
-print(f'Max 1st Row: {max1stRow()}')
+# print(f'Max 1st Row: {max1stRow()}')
 
 
 def max2ndRow():
