@@ -257,12 +257,12 @@ def Bet(round, betBox, betAmount):
                 time.sleep(0.5)
                 if firstBox[3]:
                     boxClick(betBox)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     while firstBox[3]:
                         try:
                             # checkbox = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[4]/span")
                             # confirm = driver.find_element_by_xpath("//*[@id='container']/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]")
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox')")
+                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
                             confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
                             checkbox.click()
                             time.sleep(0.5)
@@ -284,10 +284,10 @@ def Bet(round, betBox, betAmount):
                 time.sleep(0.5)
                 if firstBox[2]:
                     boxClick(betBox)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     while firstBox[2]:
                         try:
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox')")
+                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
                             confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
                             checkbox.click()
                             time.sleep(0.5)
@@ -309,10 +309,10 @@ def Bet(round, betBox, betAmount):
                 time.sleep(0.5)
                 if firstBox[1]:
                     boxClick(betBox)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     while firstBox[1]:
                         try:
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox')")
+                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
                             confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
                             checkbox.click()
                             time.sleep(0.5)
@@ -333,10 +333,10 @@ def Bet(round, betBox, betAmount):
                 time.sleep(0.5)
                 if firstBox[0]:
                     boxClick(betBox)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     while firstBox[0]:
                         try:
-                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox')")
+                            checkbox = driver.find_element_by_xpath("//span[contains(@class,'nimo-box-lottery__recharge-modal-checkbox ')")
                             confirm = driver.find_element_by_xpath("//div[contains(@class,'nimo-box-lottery-btn')")
                             checkbox.click()
                             time.sleep(0.5)
