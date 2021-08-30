@@ -120,28 +120,30 @@ def maxBox(allBoxes, inputBox):
 
 # add more calculate the max not appear, max appear, curNotAppear, curAppear for each box and also for row
 def pushCalculation(round):
-    totalCount = boxCollection.count_documents({})
+    # totalCount = boxCollection.count_documents({})
     BoxesCalculation = {}
     
     lastest100 = list(boxCollection.find().sort("time",-1).limit(100))
     allBoxes = list(boxCollection.find({}).sort("time", -1))
 
     for box in BOXES:
-        curCount = boxCollection.count_documents({"box": box})
-        basePercentage = curCount/totalCount * 100
-        curPercentage = GetCurBoxPercentage(lastest100, box)
-        percentageDiff = curPercentage - basePercentage
-        baseAppear = 100/basePercentage
+        # curCount = boxCollection.count_documents({"box": box})
+        # basePercentage = curCount/totalCount * 100
+        # curPercentage = GetCurBoxPercentage(lastest100, box)
+        # percentageDiff = curPercentage - basePercentage
+        # baseAppear = 100/basePercentage
         notAppearFor = BoxNotAppear(box)
-        appearFor = BoxAppearInRow(lastest100, box)
-        appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
-        boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
-        "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minBox(allBoxes, box), "maxAppear": maxBox(allBoxes, box),
-         "appearDiffPercentage": appearDiffPercentage}
+        # appearFor = BoxAppearInRow(lastest100, box)
+        # appearDiffPercentage = (notAppearFor - baseAppear) / baseAppear
+        boxCalculation = {"notAppearFor": notAppearFor}
+        # boxCalculation = {"basePercentage": basePercentage, "curPercentage": curPercentage, "percentageDiff": percentageDiff, 
+        # "baseAppear": baseAppear, "appearFor": appearFor, "notAppearFor": notAppearFor, "minAppear": minBox(allBoxes, box), "maxAppear": maxBox(allBoxes, box),
+        #  "appearDiffPercentage": appearDiffPercentage}
         BoxesCalculation[box] = boxCalculation
    
     calculationCollection.insert_one({"round": round, "boxes": BoxesCalculation,"max1stRow": max1stRow(allBoxes),"max2ndRow": max2ndRow(allBoxes), 
     "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100), "time": datetime.now()})
-    time.sleep(1)
+
+    
 
     print(f'Round: {round} analyst updated')
