@@ -61,8 +61,8 @@ x10Dict = readFile("diamond - x10 bet.csv")
 x10BreakPoint = x10Dict[0]["turn"]
 
 # caution: row 2 has a different structure
-# row2Dict = readFile("diamond - row 2 bet.csv")
-# row2BreakPoint = row2Dict[0]["turn"]
+row2Dict = readFile("diamond - row 2 bet.csv")
+row2BreakPoint = row2Dict[0]["turn"]
 
 # row1Dict = readFile("diamond - row 1 bet.csv")
 # row1BreakPoint = row1Dict[0]["turn"]
@@ -424,7 +424,6 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box8", betAmount)
-                        # CalculateBetResult(betRound)
             elif x25Turn >= int(x25BreakPoint):
                 print("Box 7 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.x25:
@@ -435,29 +434,28 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box7", betAmount)
-                        # CalculateBetResult(betRound)
+
             # Right now: do not use it unless recalculate the database
             # this case is different from other cases
-            # elif row2Turn >= int(row2BreakPoint):
-            #     print("Row 2 pre-betting")
-            #     if isFollowing == Case.notFollowing or isFollowing == Case.row2:
-            #         isFollowing = Case.row2
-            #         box5Amount = -1
-            #         box6Amount = -1
-            #         box7Amount = -1
-            #         box8Amount = -1
-            #         for item in row2Dict:
-            #             if int(item["turn"]) == int(row2Turn):
-            #                 box5Amount = int(item["box5"])
-            #                 box6Amount = int(item["box6"])
-            #                 box7Amount = int(item["box7"])
-            #                 box8Amount = int(item["box8"])
-            #         if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
-            #             Bet(curRound, "box5", box5Amount)
-            #             Bet(curRound, "box6", box6Amount)
-            #             Bet(curRound, "box7", box7Amount)
-            #             Bet(curRound, "box8", box8Amount)
-                        # CalculateBetResult(betRound)
+            elif row2Turn >= int(row2BreakPoint):
+                print("Row 2 pre-betting")
+                if isFollowing == Case.notFollowing or isFollowing == Case.row2:
+                    isFollowing = Case.row2
+                    box5Amount = -1
+                    box6Amount = -1
+                    box7Amount = -1
+                    box8Amount = -1
+                    for item in row2Dict:
+                        if int(item["turn"]) == int(row2Turn):
+                            box5Amount = int(item["box5"])
+                            box6Amount = int(item["box6"])
+                            box7Amount = int(item["box7"])
+                            box8Amount = int(item["box8"])
+                    if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
+                        Bet(curRound, "box5", box5Amount)
+                        Bet(curRound, "box6", box6Amount)
+                        Bet(curRound, "box7", box7Amount)
+                        Bet(curRound, "box8", box8Amount)
             elif x15Turn >= int(x15BreakPoint):
                 print("Box 6 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.x15:
@@ -468,7 +466,6 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box6", betAmount)
-                        # CalculateBetResult(betRound)
             elif x10Turn >= int(x10BreakPoint):
                 print("Box 5 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.x10:
@@ -479,7 +476,6 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box5", betAmount)
-                        # CalculateBetResult(betRound)
             #Right now do not use this, win only 50 gems if win (not worth)
             # elif row1AllTurn >= int(row1BreakPoint):
             #     print("Row 1 pre-betting")
@@ -505,7 +501,6 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box1", betAmount)
-                        # CalculateBetResult(betRound)
             elif box2NotAppear >= int(Row1_1BoxBreakPoint):
                 print("Box 2 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.box2:
@@ -516,7 +511,6 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box2", betAmount)
-                        # CalculateBetResult(betRound)
             elif box3NotAppear >= int(Row1_1BoxBreakPoint):
                 print("Box 3 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.box3:
@@ -527,7 +521,6 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box3", betAmount)
-                        # CalculateBetResult(betRound)
                 
             elif box4NotAppear >= int(Row1_1BoxBreakPoint):
                 print("Box 4 pre-betting")
@@ -540,7 +533,6 @@ while(True):
                     if betAmount != -1:
                         Bet(curRound, "box4", betAmount)
                         
-                        # CalculateBetResult(betRound)
             # elif testing:
             #     print("Testing pre-betting")
             #     if isFollowing == Case.notFollowing:

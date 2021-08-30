@@ -10,7 +10,8 @@ CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["DiamondAnalyst"]
-boxCollection = db["DiamondBoxes"]
+# boxCollection = db["DiamondBoxes"]
+boxCollection = db["BeanBoxesv2"]
 BetHistory = db["DiamondBetHistory"]
 Emulator = db["DiamondGameEmulation"]
 
@@ -104,12 +105,16 @@ def minBox2(inputBox):
                 if count > 115:
                     times += 1
                 count = 0
-    print(times)
+    # print(times)
     return result
-# print(f'Min Box: {minBox2("box8")}')
-# print(minBox2("box2"))
-# print(minBox2("box3"))
-# print(minBox2("box4"))
+# print(f'Min Box 1: {minBox2("box1")}')
+# print(f'Min Box 2: {minBox2("box2")}')
+# print(f'Min Box 3: {minBox2("box3")}')
+# print(f'Min Box 4: {minBox2("box4")}')
+# print(f'Min Box 5: {minBox2("box5")}')
+# print(f'Min Box 6: {minBox2("box6")}')
+# print(f'Min Box 7: {minBox2("box7")}')
+# print(f'Min Box 8: {minBox2("box8")}')
 
 def printTest():
     allBoxes = boxCollection.find({}).sort("time", 1)
@@ -158,7 +163,7 @@ def max1stRow():
     print(time)
     return result
 
-# print(f'Max 1st Row: {max1stRow()}')
+print(f'Max 1st Row: {max1stRow()}')
 
 
 def max2ndRow():
