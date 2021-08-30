@@ -254,7 +254,7 @@ def Bet(round, betBox, betAmount):
                 key5k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[4]")
                 # print(firstBox[3])
                 key5k.click()
-                time.sleep(0.5)
+                time.sleep(0.7)
                 if firstBox[3]:
                     boxClick(betBox)
                     time.sleep(0.5)
@@ -279,7 +279,7 @@ def Bet(round, betBox, betAmount):
                 key1k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[3]")
                 # print(firstBox[2])
                 key1k.click()
-                time.sleep(0.5)
+                time.sleep(0.7)
                 if firstBox[2]:
                     boxClick(betBox)
                     time.sleep(0.5)
@@ -304,7 +304,7 @@ def Bet(round, betBox, betAmount):
                 key500 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
                 # print(firstBox[1])
                 key500.click()
-                time.sleep(0.5)
+                time.sleep(0.7)
                 if firstBox[1]:
                     boxClick(betBox)
                     time.sleep(0.5)
@@ -328,7 +328,7 @@ def Bet(round, betBox, betAmount):
                 key50 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[1]")
                 # print(firstBox[0])
                 key50.click()
-                time.sleep(0.5)
+                time.sleep(0.7)
                 if firstBox[0]:
                     boxClick(betBox)
                     time.sleep(0.5)
