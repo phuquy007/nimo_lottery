@@ -146,15 +146,15 @@ def boxClick(betBox):
         box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
         box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
-        # while not box1 or not box2 or not box3 or not box4 or not box5 or not box6 or not box7 or not box8:
-        #     box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
-        #     box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
-        #     box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
-        #     box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
-        #     box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
-        #     box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
-        #     box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
-        #     box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
+        while not box1 or not box2 or not box3 or not box4 or not box5 or not box6 or not box7 or not box8:
+            box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+            box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
+            box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
+            box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
+            box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
+            box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
+            box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
+            box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
         if betBox == "box1":
             box1.click()
@@ -373,7 +373,7 @@ while(True):
             CalculateBetResult(curRound)
             isDisplayResult = curRound
         
-        if(curRound != isbet and (curRound == betRound + 1 or curRound == 1 and betRound == 2160)):
+        if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):
             
             chosenBox = []
             # Add box to play
@@ -393,6 +393,21 @@ while(True):
             box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + 1
             box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + 1
             box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + 1
+
+            if isFollowing != Case.notFollowing and curRound > betRound + 1:
+                gap = curRound - betRound
+                x45Turn = int(lastestBox["boxes"]["box8"]["notAppearFor"]) + gap
+                x25Turn = int(lastestBox["boxes"]["box7"]["notAppearFor"]) + gap
+                x15Turn = int(lastestBox["boxes"]["box6"]["notAppearFor"]) + gap
+                x10Turn = int(lastestBox["boxes"]["box5"]["notAppearFor"]) + gap
+
+                row2Turn = int(lastestBox["x50AppearFor"]) + gap
+                row1AllTurn = int(lastestBox["x50NotAppearFor"]) + gap
+                
+                box1NotAppear = int(lastestBox["boxes"]["box1"]["notAppearFor"]) + gap
+                box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + gap
+                box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + gap
+                box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + gap
 
             # Box1Appear = int(lastestBox["boxes"]["box1"]["appearFor"]) + 1
             # Box2Appear = int(lastestBox["boxes"]["box2"]["appearFor"]) + 1

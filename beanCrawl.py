@@ -68,4 +68,4 @@ while(True):
             pushCalculation(lastLogBox["round"])
             isBoxCalculated = True
 
-        time.sleep(3)
+        # time.sleep(3)
