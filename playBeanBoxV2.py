@@ -155,15 +155,15 @@ def boxClick(betBox):
         box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
         box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
-        # while not box1 or not box2 or not box3 or not box4 or not box5 or not box6 or not box7 or not box8:
-        #     box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
-        #     box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
-        #     box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
-        #     box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
-        #     box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
-        #     box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
-        #     box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
-        #     box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
+        while not box1 or not box2 or not box3 or not box4 or not box5 or not box6 or not box7 or not box8:
+            box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
+            box2 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]")
+            box3 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]")
+            box4 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]")
+            box5 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]")
+            box6 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]")
+            box7 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]")
+            box8 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]")
 
         if betBox == "box1":
             box1.click()
