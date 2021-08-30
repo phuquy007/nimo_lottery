@@ -80,7 +80,7 @@ def Login():
     try:
         closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
         closeDown.click()
-        time.sleep(0.5)
+        time.sleep(1)
         driver.execute_script("window.scrollTo(0, 450)") 
         box1 = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]")
         box1.click()
@@ -102,7 +102,7 @@ def Login():
         time.sleep(2.5)
         closeDown = driver.find_element_by_xpath("//i[contains(@class,'SaleGoldBeanNoticeModal__close')]")
         closeDown.click()
-        time.sleep(0.5)
+        time.sleep(1)
         driver.execute_script("window.scrollTo(0, 420)") 
         time.sleep(0.3)
     except Exception as error:

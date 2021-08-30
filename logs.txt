@@ -2255,3 +2255,11 @@
 2021-08-29 22:27:24.933565: Main Function - 'appearFor'
 2021-08-29 22:27:25.165738: Main Function - 'appearFor'
 2021-08-29 22:27:25.406703: Main Function - 'appearFor'
+2021-08-30 07:27:40.121240: Login Function - Message: no such element: Unable to locate element: {"method":"xpath","selector":"//i[contains(@class,'nimo-icon-caret-down')]"}
+  (Session info: chrome=92.0.4515.159)
+
+2021-08-30 07:27:40.121240: Login Function - Message: no such element: Unable to locate element: {"method":"xpath","selector":"//i[contains(@class,'nimo-icon-caret-down')]"}
+  (Session info: chrome=92.0.4515.159)
+
+2021-08-30 07:27:40.121240: Login Function - Message: no such element: Unable to locate element: {"method":"xpath","selector":"//i[contains(@class,'nimo-icon-caret-down')]"}
+  (Session info: chrome=92.0.4515.159)
