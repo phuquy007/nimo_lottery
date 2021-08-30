@@ -526,22 +526,22 @@ while(True):
                         Bet(curRound, "box4", betAmount)
                         
                         # CalculateBetResult(betRound)
-            elif testing:
-                print("Testing pre-betting")
-                if isFollowing == Case.notFollowing:
-                    betAmount = -1
-                    # for item in Row1_1BoxDict:
-                    #     if int(item["turn"]) == int(box4NotAppear):
-                    #         betAmount = int(item["bet"])
-                    if testingRound == 1:
-                        betAmount = 550
-                        Bet(curRound, "box3", betAmount)
-                        testingRound += 1
-                    if testingRound == 2:
-                        print("turn 2")
-                        betAmount = 50
-                        Bet(curRound, "box3", betAmount)
-                testing = False
+            # elif testing:
+            #     print("Testing pre-betting")
+            #     if isFollowing == Case.notFollowing:
+            #         betAmount = -1
+            #         # for item in Row1_1BoxDict:
+            #         #     if int(item["turn"]) == int(box4NotAppear):
+            #         #         betAmount = int(item["bet"])
+            #         if testingRound == 1:
+            #             betAmount = 550
+            #             Bet(curRound, "box3", betAmount)
+            #             testingRound += 1
+            #         if testingRound == 2:
+            #             print("turn 2")
+            #             betAmount = 50
+            #             Bet(curRound, "box3", betAmount)
+            #     testing = False
             else:
                 isFollowing = Case.notFollowing
             isNotBet = curRound
