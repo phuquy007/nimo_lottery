@@ -261,7 +261,7 @@ def Bet(round, betBox, betAmount):
 
             if keys["key5k"] > 0:
                 key5k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[4]")
-                print(firstBox[3])
+                # print(firstBox[3])
                 key5k.click()
                 time.sleep(0.5)
                 if firstBox[3]:
@@ -286,7 +286,7 @@ def Bet(round, betBox, betAmount):
                 
             if keys["key1k"] > 0:
                 key1k = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[3]")
-                print(firstBox[2])
+                # print(firstBox[2])
                 key1k.click()
                 time.sleep(0.5)
                 if firstBox[2]:
@@ -311,7 +311,7 @@ def Bet(round, betBox, betAmount):
                         boxClick(betBox)
             if keys["key500"] > 0:
                 key500 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[2]")
-                print(firstBox[1])
+                # print(firstBox[1])
                 key500.click()
                 time.sleep(0.5)
                 if firstBox[1]:
@@ -335,7 +335,7 @@ def Bet(round, betBox, betAmount):
                         boxClick(betBox)
             if keys["key50"] > 0:
                 key50 = driver.find_element_by_xpath("//*[@id='container']/div/div[5]/div[2]/div[1]")
-                print(firstBox[0])
+                # print(firstBox[0])
                 key50.click()
                 time.sleep(0.5)
                 if firstBox[0]:
@@ -403,10 +403,10 @@ while(True):
             box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + 1
             box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + 1
 
-            Box1Appear = int(lastestBox["boxes"]["box1"]["appearFor"]) + 1
-            Box2Appear = int(lastestBox["boxes"]["box2"]["appearFor"]) + 1
-            Box3Appear = int(lastestBox["boxes"]["box3"]["appearFor"]) + 1
-            Box4Appear = int(lastestBox["boxes"]["box4"]["appearFor"]) + 1
+            # Box1Appear = int(lastestBox["boxes"]["box1"]["appearFor"]) + 1
+            # Box2Appear = int(lastestBox["boxes"]["box2"]["appearFor"]) + 1
+            # Box3Appear = int(lastestBox["boxes"]["box3"]["appearFor"]) + 1
+            # Box4Appear = int(lastestBox["boxes"]["box4"]["appearFor"]) + 1
 
             if x45Turn >= int(x45BreakPoint):
                 print("Box 8 pre-betting")
