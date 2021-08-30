@@ -141,9 +141,10 @@ def pushCalculation(round):
         #  "appearDiffPercentage": appearDiffPercentage}
         BoxesCalculation[box] = boxCalculation
    
-    calculationCollection.insert_one({"round": round, "boxes": BoxesCalculation,"max1stRow": max1stRow(allBoxes),"max2ndRow": max2ndRow(allBoxes), 
-    "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100), "time": datetime.now()})
+    # calculationCollection.insert_one({"round": round, "boxes": BoxesCalculation,"max1stRow": max1stRow(allBoxes),"max2ndRow": max2ndRow(allBoxes), 
+    # "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100), "time": datetime.now()})
 
-    
+    calculationCollection.insert_one({"round": round, "boxes": BoxesCalculation,
+    "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100), "time": datetime.now()})
 
     print(f'Round: {round} analyst updated')
