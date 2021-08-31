@@ -11,7 +11,7 @@ client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["DiamondAnalyst"]
 # boxCollection = db["DiamondBoxes"]
-boxCollection = db["DiamondBoxes"]
+boxCollection = db["BeanBoxesv2"]
 BetHistory = db["DiamondBetHistory"]
 Emulator = db["DiamondGameEmulation"]
 
@@ -114,7 +114,7 @@ def minBox2(inputBox):
                     result = count
                     print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
             else:
-                if count > 85:
+                if count > 55:
                     times += 1
                 count = 0
     print(times)

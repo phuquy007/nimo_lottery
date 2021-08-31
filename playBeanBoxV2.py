@@ -168,35 +168,35 @@ def boxClick(betBox):
         if betBox == "box1":
             box1.click()
             print("Box 1 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box2":
             box2.click()
             print("Box 2 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box3":
             box3.click()
             print("Box 3 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box4":
             box4.click()
             print("Box 4 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box5":
             box5.click()
             print("Box 5 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box6":
             box6.click()
             print("Box 6 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box7":
             box7.click()
             print("Box 7 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
         if betBox == "box8":
             box8.click()
             print("Box 8 is clicked")
-            time.sleep(0.5)
+            time.sleep(0.7)
     except Exception as error:
         WriteLog(error, "BoxClick Function")
         
@@ -383,8 +383,8 @@ while(True):
             isDisplayResult = curRound
             driver.refresh()
         
-        if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):
-            
+        if curRound != isbet and (curRound == betRound + 1 or curRound == 1 and betRound == 2160):
+        # if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):    
             chosenBox = []
             # Add box to play
             # print("Current Round: " + str(curRound))
@@ -404,20 +404,20 @@ while(True):
             box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + 1
             box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + 1
 
-            if isFollowing != Case.notFollowing and curRound > betRound + 1:
-                gap = curRound - betRound
-                x45Turn = int(lastestBox["boxes"]["box8"]["notAppearFor"]) + gap
-                x25Turn = int(lastestBox["boxes"]["box7"]["notAppearFor"]) + gap
-                x15Turn = int(lastestBox["boxes"]["box6"]["notAppearFor"]) + gap
-                x10Turn = int(lastestBox["boxes"]["box5"]["notAppearFor"]) + gap
+            # if isFollowing != Case.notFollowing and curRound > betRound + 1:
+            #     gap = curRound - betRound
+            #     x45Turn = int(lastestBox["boxes"]["box8"]["notAppearFor"]) + gap
+            #     x25Turn = int(lastestBox["boxes"]["box7"]["notAppearFor"]) + gap
+            #     x15Turn = int(lastestBox["boxes"]["box6"]["notAppearFor"]) + gap
+            #     x10Turn = int(lastestBox["boxes"]["box5"]["notAppearFor"]) + gap
 
-                row2Turn = int(lastestBox["x50AppearFor"]) + gap
-                row1AllTurn = int(lastestBox["x50NotAppearFor"]) + gap
+            #     row2Turn = int(lastestBox["x50AppearFor"]) + gap
+            #     row1AllTurn = int(lastestBox["x50NotAppearFor"]) + gap
                 
-                box1NotAppear = int(lastestBox["boxes"]["box1"]["notAppearFor"]) + gap
-                box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + gap
-                box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + gap
-                box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + gap
+            #     box1NotAppear = int(lastestBox["boxes"]["box1"]["notAppearFor"]) + gap
+            #     box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + gap
+            #     box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + gap
+            #     box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + gap
             # Box1Appear = int(lastestBox["boxes"]["box1"]["appearFor"]) + 1
             # Box2Appear = int(lastestBox["boxes"]["box2"]["appearFor"]) + 1
             # Box3Appear = int(lastestBox["boxes"]["box3"]["appearFor"]) + 1
