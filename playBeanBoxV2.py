@@ -381,7 +381,7 @@ while(True):
         if(isDisplayResult != curRound):
             CalculateBetResult(curRound)
             isDisplayResult = curRound
-            driver.refresh()
+            # driver.refresh()
         
         if curRound != isbet and (curRound == betRound + 1 or curRound == 1 and betRound == 2160):
         # if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):    
