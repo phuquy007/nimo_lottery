@@ -374,8 +374,8 @@ while(True):
             CalculateBetResult(curRound)
             isDisplayResult = curRound
         
-        if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):
-            
+        if(curRound != isbet and (curRound == betRound + 1 or (curRound == 1 and betRound == 2160))):
+        # if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):   
             chosenBox = []
             # Add box to play
             # print("Current Round: " + str(curRound))
@@ -395,20 +395,20 @@ while(True):
             box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + 1
             box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + 1
 
-            if isFollowing != Case.notFollowing and curRound > betRound + 1:
-                gap = curRound - betRound
-                x45Turn = int(lastestBox["boxes"]["box8"]["notAppearFor"]) + gap
-                x25Turn = int(lastestBox["boxes"]["box7"]["notAppearFor"]) + gap
-                x15Turn = int(lastestBox["boxes"]["box6"]["notAppearFor"]) + gap
-                x10Turn = int(lastestBox["boxes"]["box5"]["notAppearFor"]) + gap
+            # if isFollowing != Case.notFollowing and curRound > betRound + 1:
+            #     gap = curRound - betRound
+            #     x45Turn = int(lastestBox["boxes"]["box8"]["notAppearFor"]) + gap
+            #     x25Turn = int(lastestBox["boxes"]["box7"]["notAppearFor"]) + gap
+            #     x15Turn = int(lastestBox["boxes"]["box6"]["notAppearFor"]) + gap
+            #     x10Turn = int(lastestBox["boxes"]["box5"]["notAppearFor"]) + gap
 
-                row2Turn = int(lastestBox["x50AppearFor"]) + gap
-                row1AllTurn = int(lastestBox["x50NotAppearFor"]) + gap
+            #     row2Turn = int(lastestBox["x50AppearFor"]) + gap
+            #     row1AllTurn = int(lastestBox["x50NotAppearFor"]) + gap
                 
-                box1NotAppear = int(lastestBox["boxes"]["box1"]["notAppearFor"]) + gap
-                box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + gap
-                box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + gap
-                box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + gap
+            #     box1NotAppear = int(lastestBox["boxes"]["box1"]["notAppearFor"]) + gap
+            #     box2NotAppear = int(lastestBox["boxes"]["box2"]["notAppearFor"]) + gap
+            #     box3NotAppear = int(lastestBox["boxes"]["box3"]["notAppearFor"]) + gap
+            #     box4NotAppear = int(lastestBox["boxes"]["box4"]["notAppearFor"]) + gap
 
             # Box1Appear = int(lastestBox["boxes"]["box1"]["appearFor"]) + 1
             # Box2Appear = int(lastestBox["boxes"]["box2"]["appearFor"]) + 1
@@ -438,25 +438,25 @@ while(True):
 
             # Right now: do not use it unless recalculate the database
             # this case is different from other cases
-            elif row2Turn >= int(row2BreakPoint):
-                print("Row 2 pre-betting")
-                if isFollowing == Case.notFollowing or isFollowing == Case.row2:
-                    isFollowing = Case.row2
-                    box5Amount = -1
-                    box6Amount = -1
-                    box7Amount = -1
-                    box8Amount = -1
-                    for item in row2Dict:
-                        if int(item["turn"]) == int(row2Turn):
-                            box5Amount = int(item["box5"])
-                            box6Amount = int(item["box6"])
-                            box7Amount = int(item["box7"])
-                            box8Amount = int(item["box8"])
-                    if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
-                        Bet(curRound, "box5", box5Amount)
-                        Bet(curRound, "box6", box6Amount)
-                        Bet(curRound, "box7", box7Amount)
-                        Bet(curRound, "box8", box8Amount)
+            # elif row2Turn >= int(row2BreakPoint):
+            #     print("Row 2 pre-betting")
+            #     if isFollowing == Case.notFollowing or isFollowing == Case.row2:
+            #         isFollowing = Case.row2
+            #         box5Amount = -1
+            #         box6Amount = -1
+            #         box7Amount = -1
+            #         box8Amount = -1
+            #         for item in row2Dict:
+            #             if int(item["turn"]) == int(row2Turn):
+            #                 box5Amount = int(item["box5"])
+            #                 box6Amount = int(item["box6"])
+            #                 box7Amount = int(item["box7"])
+            #                 box8Amount = int(item["box8"])
+            #         if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
+            #             Bet(curRound, "box5", box5Amount)
+            #             Bet(curRound, "box6", box6Amount)
+            #             Bet(curRound, "box7", box7Amount)
+            #             Bet(curRound, "box8", box8Amount)
             elif x15Turn >= int(x15BreakPoint):
                 print("Box 6 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.x15:
