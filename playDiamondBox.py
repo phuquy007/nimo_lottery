@@ -64,8 +64,8 @@ x10BreakPoint = x10Dict[0]["turn"]
 row2Dict = readFile("diamond - row 2 bet.csv")
 row2BreakPoint = row2Dict[0]["turn"]
 
-# row1Dict = readFile("diamond - row 1 bet.csv")
-# row1BreakPoint = row1Dict[0]["turn"]
+row1Dict = readFile("diamond - row 1 bet.csv")
+row1BreakPoint = row1Dict[0]["turn"]
 
 # Row1_3BoxesDict = readFile("diamond - 3 boxes row 1 bet.csv")
 # Row1_3BoxesBreakPoint = Row1_3BoxesDict[0]["turn"]
@@ -214,7 +214,7 @@ def CheckUnBet(round, betBox, betAmt):
             
         BetedAmount = int(selectedBox[4:])
         if int(BetedAmount) < int(betAmt):
-            Bet(round, betBox, int(betAmt - BetedAmount))
+            Bet(round, betBox, betAmt - BetedAmount)
     except Exception as error:
         WriteLog(error, "CheckUnBet Function")
         CheckUnBet(round, betBox, betAmt)

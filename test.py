@@ -120,7 +120,7 @@ def minBox2(inputBox):
                     result = count
                     print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
             else:
-                if count > 41:
+                if count > 60:
                     times += 1
                 count = 0
     print(times)
@@ -129,8 +129,8 @@ def minBox2(inputBox):
 # print(f'Min Box 2: {minBox2("box2")}')
 # print(f'Min Box 3: {minBox2("box3")}')
 # print(f'Min Box 4: {minBox2("box4")}')
-print(f'Min Box 5: {minBox2("box5")}')
-# print(f'Min Box 6: {minBox2("box6")}')
+# print(f'Min Box 5: {minBox2("box5")}')
+print(f'Min Box 6: {minBox2("box6")}')
 # print(f'Min Box 7: {minBox2("box7")}')
 # print(f'Min Box 8: {minBox2("box8")}')
 
