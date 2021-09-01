@@ -67,8 +67,8 @@ https://www.nimo.tv/mkt/act/super/box_lottery
 170477
 176127
 179327
+181027
 
 
-
-kc: 8187
-41379
+kc: 
+42506
