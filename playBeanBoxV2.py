@@ -92,11 +92,14 @@ def Login():
         areacode.click()
         time.sleep(0.1)
         vietnameAreaCode = driver.find_element_by_xpath("//div[text()='Vietnam']")
+        # vietnameAreaCode = driver.find_element_by_xpath("//div[text()='Turkey']")
         vietnameAreaCode.click()
         time.sleep(0.1)
         phoneNumber.send_keys("363688557")
+        # phoneNumber.send_keys("5377059896")
         time.sleep(0.1)
         password.send_keys("4blablablabla")
+        # password.send_keys("irfan.48")
         time.sleep(0.1)
         loginButton.click() 
         time.sleep(2.5)
@@ -202,31 +205,33 @@ def boxClick(betBox):
         
 
 def CheckUnBet(round, betBox, betAmt):
-    try:
-        selectedBox = "You:0"
-        if betBox == "box1":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]/div/div[2]").text
-        if betBox == "box2":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]/div/div[2]").text
-        if betBox == "box3":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]/div/div[2]").text
-        if betBox == "box4":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]/div/div[2]").text
-        if betBox == "box5":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]/div/div[2]").text
-        if betBox == "box6":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]/div/div[2]").text
-        if betBox == "box7":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]/div/div[2]").text
-        if betBox == "box8":
-            selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]/div/div[2]").text
-            
-        BetedAmount = int(selectedBox[4:])
-        if int(BetedAmount) < int(betAmt):
-            Bet(round, betBox, int(betAmt - BetedAmount))
-    except Exception as error:
-        WriteLog(error, "CheckUnBet Function")
-        CheckUnBet(round, betBox, betAmt)
+    # try:
+    selectedBox = "You:0"
+    if betBox == "box1":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[1]/div/div[2]").text
+    if betBox == "box2":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[2]/div/div[2]").text
+    if betBox == "box3":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[3]/div/div[2]").text
+    if betBox == "box4":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[4]/div/div[2]").text
+    if betBox == "box5":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[5]/div/div[2]").text
+    if betBox == "box6":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[6]/div/div[2]").text
+    if betBox == "box7":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[7]/div/div[2]").text
+    if betBox == "box8":
+        selectedBox = driver.find_element_by_xpath("//*[@id='container']/div/div[4]/div/div[8]/div/div[2]").text
+
+    print(selectedBox)
+        
+    BetedAmount = int(selectedBox[4:])
+    if int(BetedAmount) < int(betAmt):
+        Bet(round, betBox, int(betAmt - BetedAmount))
+    # except Exception as error:
+    #     WriteLog(error, "CheckUnBet Function")
+        # CheckUnBet(round, betBox, betAmt)
 
 
 firstBox = [True, True, True, True]
@@ -370,7 +375,7 @@ isNotBet = -1
 isDisplayResult = -1
 isFollowing = Case.notFollowing
 isBoxCalculated = False
-testing = False
+testing = True
 testingRound = 1
 while(True):
     
@@ -379,7 +384,9 @@ while(True):
         betRound = int(GetLastestcalculationBox())
 
         if(isDisplayResult != curRound):
-            CalculateBetResult(curRound)
+            betResult = CalculateBetResult(curRound)
+            if betResult == "win":
+                isFollowing = Case.notFollowing
             isDisplayResult = curRound
             # driver.refresh()
         
@@ -551,18 +558,13 @@ while(True):
             elif testing:
                 print("Testing pre-betting")
                 if isFollowing == Case.notFollowing:
-                    betAmount = -1
-                    # for item in Row1_1BoxDict:
-                    #     if int(item["turn"]) == int(box4NotAppear):
-                    #         betAmount = int(item["bet"])
-                    if testingRound == 1:
-                        betAmount = 550
-                        Bet(curRound, "box3", betAmount)
-                        testingRound += 1
-                    if testingRound == 2:
-                        print("turn 2")
-                        betAmount = 50
-                        Bet(curRound, "box3", betAmount)
+           
+                    betAmount = 50
+                    Bet(curRound, "box1", betAmount)
+                    Bet(curRound, "box2", betAmount)
+                    Bet(curRound, "box3", betAmount)
+                    Bet(curRound, "box4", betAmount)
+                       
                 testing = False
             else:
                 isFollowing = Case.notFollowing

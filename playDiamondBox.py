@@ -372,7 +372,9 @@ while(True):
         betRound = int(GetLastestcalculationBox())
 
         if(isDisplayResult != curRound):
-            CalculateBetResult(curRound)
+            betResult = CalculateBetResult(curRound)
+            if betResult == "win":
+                isFollowing = Case.notFollowing
             isDisplayResult = curRound
         
         if(curRound != isbet and (curRound == betRound + 1 or (curRound == 1 and betRound == 2160))):

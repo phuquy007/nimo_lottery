@@ -42,12 +42,14 @@ def CalculateBetResult(round):
                 print("")
                 print("----------------------------------------------------------------")
                 print("")
+                return "win"
             else:
                 myDiamond = myDiamond - int(totalBetDiamond)
                 print(f'Round: {round} Winning Box: {result["box"]} - selected Box: {myBet["bets"]} ---> Lose')
                 print("")
                 print("----------------------------------------------------------------")
                 print("")
+                return "lose"
 
         else:
             print(f'Round {round} is not bet')
