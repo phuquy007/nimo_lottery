@@ -351,6 +351,7 @@ def Bet(round, betBox, betAmount):
             CheckUnBet(round, betBox, betAmount)
             isDone = True
             print(f'Round {round} Bet {betBox} Amount {betAmount}')
+            driver.refresh()
         except Exception as error:
             WriteLog(error, "Bet Function (Key selecting)")
             CheckUnBet(round, betBox, betAmount)

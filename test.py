@@ -86,7 +86,7 @@ def BoxNotAppear(inputBox):
     else:
         result = lastLogRound - lastestBoxAppear
     return result
-# print(BoxNotAppear("box5"))
+print(BoxNotAppear("box7"))
 
 def minBox(inputBox):
     allBoxes = list(boxCollection.find({}).sort("time", 1))
@@ -130,7 +130,7 @@ def minBox2(inputBox):
 # print(f'Min Box 3: {minBox2("box3")}')
 # print(f'Min Box 4: {minBox2("box4")}')
 # print(f'Min Box 5: {minBox2("box5")}')
-print(f'Min Box 6: {minBox2("box6")}')
+# print(f'Min Box 6: {minBox2("box6")}')
 # print(f'Min Box 7: {minBox2("box7")}')
 # print(f'Min Box 8: {minBox2("box8")}')
 
