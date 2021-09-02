@@ -64,6 +64,20 @@ def GetLastestLogRound():
 #     totalBetDiamond += betAmt
 # print(totalBetDiamond)
 
+
+def printTest():
+    allBoxes = boxCollection.find({}).sort("time", 1)
+    result = 0
+    count = 0
+    times = 0
+    for box in allBoxes:
+        if int(box["round"]) > 234 and int(box["round"]) < 251 and box["time"].date() == datetime(2021,9,2).date():
+            print(f'Round {box["round"]} - {box["box"]} Time {str(box["time"].date())}')
+    return result
+
+# printTest()
+
+
 def BoxNotAppear(inputBox):
     lastestBoxAppear = int(list(boxCollection.find({"box": inputBox}).sort("time", -1).limit(1))[0]["round"])
     lastLogRound = int(GetLastestLogRound())
@@ -73,7 +87,28 @@ def BoxNotAppear(inputBox):
     else:
         result = lastLogRound - lastestBoxAppear
     return result
-# print(BoxNotAppear("box7"))
+
+
+def BoxNotAppear1(inputBox):
+    boxes = list(boxCollection.find({}).sort("time", -1).limit(500))
+    preRound = -1
+    count = 0
+    for box in boxes:
+        if box["box"] == inputBox:
+            return count
+        else:
+            if preRound == -1 or (preRound == 1 and int(box["round"]) == 2160) or (preRound == int(box["round"]) + 1):
+                count += 1
+                preRound = int(box["round"])
+                continue
+            else:
+                return count
+    return count
+# print(f'Box not appear: {BoxNotAppear("box8")}')
+# print(f'Box not appear 1: {BoxNotAppear1("box8")}')
+
+
+
 
 def minBox(inputBox):
     allBoxes = list(boxCollection.find({}).sort("time", 1))
@@ -107,10 +142,10 @@ def minBox2(inputBox):
                     result = count
                     # print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
             else:
-                if count > 63:
+                if count > 215:
                     times += 1
                 count = 0
-    print(times)
+    # print(times)
     return result
 # print(f'Min Box 1: {minBox2("box1")}')
 # print(f'Min Box 2: {minBox2("box2")}')
@@ -118,20 +153,10 @@ def minBox2(inputBox):
 # print(f'Min Box 4: {minBox2("box4")}')
 # print(f'Min Box 5: {minBox2("box5")}')
 # print(f'Min Box 6: {minBox2("box6")}')
-print(f'Min Box 7: {minBox2("box7")}')
+# print(f'Min Box 7: {minBox2("box7")}')
 # print(f'Min Box 8: {minBox2("box8")}')
 
-def printTest():
-    allBoxes = boxCollection.find({}).sort("time", 1)
-    result = 0
-    count = 0
-    times = 0
-    for box in allBoxes:
-        if int(box["round"]) > 246 and int(box["round"]) < 526 and box["time"].date() == datetime(2021,8,30).date():
-            print(f'Round {box["round"]} - {box["box"]} Time {str(box["time"].date())}')
-    return result
 
-# printTest()
 
 
 def maxBox(inputBox):
