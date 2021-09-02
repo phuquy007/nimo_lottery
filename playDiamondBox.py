@@ -48,29 +48,29 @@ TOTAL_COUNT = boxCollection.count_documents({})
 
 BOXES = ["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8"]
 
-x45Dict = readFile("diamond - x45 bet.csv")
+x45Dict = readFile("data/diamond - x45 bet.csv")
 x45BreakPoint = x45Dict[0]["turn"]
 
-x25Dict = readFile("diamond - x25 bet.csv")
+x25Dict = readFile("data/diamond - x25 bet.csv")
 x25BreakPoint = x25Dict[0]["turn"]
 
-x15Dict = readFile("diamond - x15 bet.csv")
+x15Dict = readFile("data/diamond - x15 bet.csv")
 x15BreakPoint = x15Dict[0]["turn"]
 
-x10Dict = readFile("diamond - x10 bet.csv")
+x10Dict = readFile("data/diamond - x10 bet.csv")
 x10BreakPoint = x10Dict[0]["turn"]
 
 # caution: row 2 has a different structure
-row2Dict = readFile("diamond - row 2 bet.csv")
+row2Dict = readFile("data/diamond - row 2 bet.csv")
 row2BreakPoint = row2Dict[0]["turn"]
 
-row1Dict = readFile("diamond - row 1 bet.csv")
+row1Dict = readFile("data/diamond - row 1 bet.csv")
 row1BreakPoint = row1Dict[0]["turn"]
 
 # Row1_3BoxesDict = readFile("diamond - 3 boxes row 1 bet.csv")
 # Row1_3BoxesBreakPoint = Row1_3BoxesDict[0]["turn"]
 
-Row1_1BoxDict = readFile("diamond - 1 box row 1 bet.csv")
+Row1_1BoxDict = readFile("data/diamond - 1 box row 1 bet.csv")
 Row1_1BoxBreakPoint = Row1_1BoxDict[0]["turn"]
 
 def Login():
@@ -376,6 +376,8 @@ while(True):
             if betResult == "win":
                 isFollowing = Case.notFollowing
             isDisplayResult = curRound
+            driver.refresh()
+            time.sleep(1)
         
         if(curRound != isbet and (curRound == betRound + 1 or (curRound == 1 and betRound == 2160))):
         # if(curRound != isbet and ((curRound == betRound + 1 or (curRound == 1 and betRound == 2160)) or (isFollowing != Case.notFollowing and curRound > betRound + 1))):   

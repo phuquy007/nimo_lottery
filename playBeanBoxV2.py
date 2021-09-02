@@ -51,29 +51,29 @@ BOXES = ["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8"]
 phoneNumber = "363688557"
 password = "4blablablabla"
 
-x45Dict = readFile("x45 bet.csv")
+x45Dict = readFile("data/x45 bet.csv")
 x45BreakPoint = x45Dict[0]["turn"]
 
-x25Dict = readFile("x25 bet.csv")
+x25Dict = readFile("data/x25 bet.csv")
 x25BreakPoint = x25Dict[0]["turn"]
 
-x15Dict = readFile("x15 bet.csv")
+x15Dict = readFile("data/x15 bet.csv")
 x15BreakPoint = x15Dict[0]["turn"]
 
-x10Dict = readFile("x10 bet.csv")
+x10Dict = readFile("data/x10 bet.csv")
 x10BreakPoint = x10Dict[0]["turn"]
 
 # caution: row 2 has a different structure
-row2Dict = readFile("row 2 bet.csv")
+row2Dict = readFile("data/row 2 bet.csv")
 row2BreakPoint = row2Dict[0]["turn"]
 
-row1Dict = readFile("row 1 bet.csv")
+row1Dict = readFile("data/row 1 bet.csv")
 row1BreakPoint = row1Dict[0]["turn"]
 
-Row1_3BoxesDict = readFile("3 boxes row 1 bet.csv")
+Row1_3BoxesDict = readFile("data/3 boxes row 1 bet.csv")
 Row1_3BoxesBreakPoint = Row1_3BoxesDict[0]["turn"]
 
-Row1_1BoxDict = readFile("1 box row 1 bet.csv")
+Row1_1BoxDict = readFile("data/1 box row 1 bet.csv")
 Row1_1BoxBreakPoint = Row1_1BoxDict[0]["turn"]
 
 def Login():

@@ -10,26 +10,13 @@ CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["DiamondAnalyst"]
-boxCollection = db["DiamondBoxes"]
-# boxCollection = db["BeanBoxesv2"]
+# boxCollection = db["DiamondBoxes"]
+boxCollection = db["BeanBoxesv2"]
 BetHistory = db["DiamondBetHistory"]
 Emulator = db["DiamondGameEmulation"]
 
-x45Dict = readFile("x45 bet.csv")
-x45BreakPoint = x45Dict[0]["bet"]
-# print(x45BreakPoint)
-
 def GetLastestLogRound():
     return list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
-
-def getBetAmount(betCase, betTurn):
-    for item in x45Dict:
-        print(f'Turn: {item["turn"]} - Bet: {item["bet"]}')
-        if int(item["turn"]) == int(betTurn):
-            return item["bet"]
-    return -1
-
-
 
 
 # print(getBetAmount("", 153))
@@ -86,7 +73,7 @@ def BoxNotAppear(inputBox):
     else:
         result = lastLogRound - lastestBoxAppear
     return result
-print(BoxNotAppear("box7"))
+# print(BoxNotAppear("box7"))
 
 def minBox(inputBox):
     allBoxes = list(boxCollection.find({}).sort("time", 1))
@@ -118,9 +105,9 @@ def minBox2(inputBox):
                 count += 1
                 if count > result:
                     result = count
-                    print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
+                    # print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
             else:
-                if count > 60:
+                if count > 63:
                     times += 1
                 count = 0
     print(times)
@@ -131,7 +118,7 @@ def minBox2(inputBox):
 # print(f'Min Box 4: {minBox2("box4")}')
 # print(f'Min Box 5: {minBox2("box5")}')
 # print(f'Min Box 6: {minBox2("box6")}')
-# print(f'Min Box 7: {minBox2("box7")}')
+print(f'Min Box 7: {minBox2("box7")}')
 # print(f'Min Box 8: {minBox2("box8")}')
 
 def printTest():
