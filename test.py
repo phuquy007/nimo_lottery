@@ -58,7 +58,14 @@ def BoxNotAppear1(inputBox):
                 return count
     return count
 # print(f'Box not appear: {BoxNotAppear("box8")}')
-# print(f'Box not appear 1: {BoxNotAppear1("box6")}')
+# print(f'Box 1 not appear: {BoxNotAppear1("box1")}')
+# print(f'Box 2 not appear: {BoxNotAppear1("box2")}')
+# print(f'Box 3 not appear: {BoxNotAppear1("box3")}')
+# print(f'Box 4 not appear: {BoxNotAppear1("box4")}')
+# print(f'Box 5 not appear: {BoxNotAppear1("box5")}')
+# print(f'Box 6 not appear: {BoxNotAppear1("box6")}')
+# print(f'Box 7 not appear: {BoxNotAppear1("box7")}')
+# print(f'Box 8 not appear: {BoxNotAppear1("box8")}')
 
 
 
@@ -100,14 +107,14 @@ def minBox2(inputBox):
                 count = 0
     print(times)
     return result
-# print(f'Min Box 1: {minBox2("box1")}')
-# print(f'Min Box 2: {minBox2("box2")}')
-# print(f'Min Box 3: {minBox2("box3")}')
-# print(f'Min Box 4: {minBox2("box4")}')
-# print(f'Min Box 5: {minBox2("box5")}')
+print(f'Min Box 1: {minBox2("box1")}')
+print(f'Min Box 2: {minBox2("box2")}')
+print(f'Min Box 3: {minBox2("box3")}')
+print(f'Min Box 4: {minBox2("box4")}')
+print(f'Min Box 5: {minBox2("box5")}')
 print(f'Min Box 6: {minBox2("box6")}')
-# print(f'Min Box 7: {minBox2("box7")}')
-# print(f'Min Box 8: {minBox2("box8")}')
+print(f'Min Box 7: {minBox2("box7")}')
+print(f'Min Box 8: {minBox2("box8")}')
 
 
 
