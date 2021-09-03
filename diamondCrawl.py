@@ -53,7 +53,7 @@ while(True):
         continue
     if prizebox and round != curRound:
         round = curRound
-        newBox = {"round": round, "box": prizebox, "time": datetime.now()}
+        newBox = {"round": round, "box": prizebox,"date": str(datetime.today().date()), "time": datetime.now()}
         pushToMongo(newBox)
         print("Round: " + round +" - box: " + str(prizebox))
         

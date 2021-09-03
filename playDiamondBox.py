@@ -240,7 +240,7 @@ def Bet(round, betBox, betAmount):
             newBets[betBox] = betAmount
             BetHistory.update_one({"_id": curID}, {"$set":{"bets":newBets}})
         else:
-            BetHistory.insert_one({"round": round, "bets":{betBox: betAmount}, "time": datetime.now()})
+            BetHistory.insert_one({"round": round, "bets":{betBox: betAmount},"date": str(datetime.today().date()), "time": datetime.now()})
         
         keys = calculateKeys(int(betAmount))
 
@@ -440,26 +440,26 @@ while(True):
                             betAmount = int(item["bet"])
                     if betAmount != -1:
                         Bet(curRound, "box7", betAmount)
-
-            elif row2Turn >= int(row2BreakPoint):
-                print("Row 2 pre-betting")
-                if isFollowing == Case.notFollowing or isFollowing == Case.row2:
-                    isFollowing = Case.row2
-                    box5Amount = -1
-                    box6Amount = -1
-                    box7Amount = -1
-                    box8Amount = -1
-                    for item in row2Dict:
-                        if int(item["turn"]) == int(row2Turn):
-                            box5Amount = int(item["box5"])
-                            box6Amount = int(item["box6"])
-                            box7Amount = int(item["box7"])
-                            box8Amount = int(item["box8"])
-                    if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
-                        Bet(curRound, "box5", box5Amount)
-                        Bet(curRound, "box6", box6Amount)
-                        Bet(curRound, "box7", box7Amount)
-                        Bet(curRound, "box8", box8Amount)
+            # Currently, not use
+            # elif row2Turn >= int(row2BreakPoint):
+            #     print("Row 2 pre-betting")
+            #     if isFollowing == Case.notFollowing or isFollowing == Case.row2:
+            #         isFollowing = Case.row2
+            #         box5Amount = -1
+            #         box6Amount = -1
+            #         box7Amount = -1
+            #         box8Amount = -1
+            #         for item in row2Dict:
+            #             if int(item["turn"]) == int(row2Turn):
+            #                 box5Amount = int(item["box5"])
+            #                 box6Amount = int(item["box6"])
+            #                 box7Amount = int(item["box7"])
+            #                 box8Amount = int(item["box8"])
+            #         if box5Amount != -1 and box6Amount != -1 and box7Amount != -1 and box8Amount != -1:
+            #             Bet(curRound, "box5", box5Amount)
+            #             Bet(curRound, "box6", box6Amount)
+            #             Bet(curRound, "box7", box7Amount)
+            #             Bet(curRound, "box8", box8Amount)
             elif x15Turn >= int(x15BreakPoint):
                 print("Box 6 pre-betting")
                 if isFollowing == Case.notFollowing or isFollowing == Case.x15:

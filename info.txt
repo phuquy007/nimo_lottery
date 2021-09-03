@@ -1,21 +1,4 @@
-nimo-box-lottery__box nimo-box-lottery__sudoku-box nimo-box-lottery__last-result__box
-
 prize-box
-
-
-while(True):
-   try:
-      driver.find_element_by_xpath('//*[@title="Day enabled"]').click()
-      driver.refresh()
-      alert.accept()
-      break
-   except Exception as e:
-      driver.refresh()
-      continue
-	  
-	  
-	  
-	  
 	  
 0868242751
 4blablablabla
@@ -51,7 +34,6 @@ https://clients.cavpshost.com/cart.php?a=confproduct&i=0
 https://clientarea.ihostvps.net/cart.php?a=confproduct&i=0
 https://support.routerhosting.com/cart.php?a=confproduct&i=0
 
-153029
 
 https://www.nimo.tv/mkt/act/super/box_lottery
 
@@ -93,3 +75,5 @@ kc:
 54324
 54574
 54974
+56024
+59850

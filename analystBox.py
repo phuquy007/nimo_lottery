@@ -162,6 +162,6 @@ def pushCalculation(round):
     # "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100), "time": datetime.now()})
     
     calculationCollection.insert_one({"round": round, "boxes": BoxesCalculation, 
-    "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100), "time": datetime.now()})
+    "x50NotAppearFor": BoxX50NotAppearFor(lastest100), "x50AppearFor":BoxX50AppearFor(lastest100),"date": str(datetime.now().date()), "time": datetime.now()})
 
     print(f'Round: {round} analyst updated')

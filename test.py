@@ -10,60 +10,13 @@ CONNECTION_STRING = "mongodb+srv://Ryan:trantran2312@cluster0.pwc6h.mongodb.net/
 client = MongoClient(CONNECTION_STRING)
 db = client["NimoLottery"]
 calculationCollection = db["DiamondAnalyst"]
-# boxCollection = db["DiamondBoxes"]
-boxCollection = db["BeanBoxesv2"]
+boxCollection = db["DiamondBoxes"]
+# boxCollection = db["BeanBoxesv2"]
 BetHistory = db["DiamondBetHistory"]
 Emulator = db["DiamondGameEmulation"]
 
 def GetLastestLogRound():
     return list(boxCollection.find({}).sort("time",-1).limit(1))[0]["round"]
-
-
-# print(getBetAmount("", 153))
-
-# print(datetime.date().today())
-
-# boxes = list(boxCollection.find({}).sort("time", -1))
-# print(boxes[0])
-# # print(boxes[1])
-# box = list(calculationCollection.find({}).sort("time", -1).limit(2))
-# print(box[0])
-# print(box[1])
-
-# boxes = list(boxCollection.find({}).sort("time", -1))
-# print(boxes[0])
-# print(list(BetHistory.find({}).sort("time", -1).limit(1))[0])
-# myDiamond = Emulator.find_one({"id": "quytran"})
-# print(myDiamond["diamond"])
-
-# lastestBox = list(calculationCollection.find({}).sort("time", -1).limit(1))[0]
-# print(lastestBox["x50AppearFor"])
-
-
-# BetHistory.insert_one({"Round": 12, "bets": {"box1": 10, "box2": 20}, "Time":datetime.now()})
-
-# try:
-#     bets = list(BetHistory.find({"Round": 12}).sort("Time", -1))
-#     for bet in bets:
-#         if bet["Time"].date() == datetime.today().date():
-#             curID = bet["_id"]
-# except:
-#     print(f'Round : {12} - Cannot Bet')
-# if curID != -1:
-#     updatingBet = BetHistory.find_one({"_id": curID})
-#     newBets = updatingBet["bets"]
-#     newBets["box3"] = 30
-#     # print(newBets)
-#     BetHistory.update_one({"_id": curID}, {"$set":{"bets":newBets}})
-
-# totalBetDiamond = 0
-# myBet = list(BetHistory.find({}).sort("time", -1).limit(1))[0]
-
-# for box, betAmt in myBet["bets"].items():
-#     print(f'Box: {box} - Bet: {betAmt}')
-#     totalBetDiamond += betAmt
-# print(totalBetDiamond)
-
 
 def printTest():
     allBoxes = boxCollection.find({}).sort("time", 1)
@@ -105,7 +58,7 @@ def BoxNotAppear1(inputBox):
                 return count
     return count
 # print(f'Box not appear: {BoxNotAppear("box8")}')
-# print(f'Box not appear 1: {BoxNotAppear1("box8")}')
+# print(f'Box not appear 1: {BoxNotAppear1("box6")}')
 
 
 
@@ -142,17 +95,17 @@ def minBox2(inputBox):
                     result = count
                     # print("Min : " + str(result) + " - Round: " + allBoxes[i]["round"] + " - Time:" + str(allBoxes[i]["time"].date()))
             else:
-                if count > 215:
+                if count > 84:
                     times += 1
                 count = 0
-    # print(times)
+    print(times)
     return result
 # print(f'Min Box 1: {minBox2("box1")}')
 # print(f'Min Box 2: {minBox2("box2")}')
 # print(f'Min Box 3: {minBox2("box3")}')
 # print(f'Min Box 4: {minBox2("box4")}')
 # print(f'Min Box 5: {minBox2("box5")}')
-# print(f'Min Box 6: {minBox2("box6")}')
+print(f'Min Box 6: {minBox2("box6")}')
 # print(f'Min Box 7: {minBox2("box7")}')
 # print(f'Min Box 8: {minBox2("box8")}')
 
